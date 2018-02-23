@@ -6,9 +6,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ"
-        crossorigin="anonymous">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
 </head>
 
 <body>
@@ -18,69 +17,103 @@
         <hr>
         <h4>日数</h4>
         <p>日数を選んでください</p>
-        <div class="row">
-            <label>
-                <input type="radio" name="haku" value="0" checked>日帰り
-            </label>
-            <label>
-                <input type="radio" name="haku" value="1">1泊2日
-            </label>
-            <label>
-                <input type="radio" name="haku" value="2">2泊3日
-            </label>
-            <label>
-                <input type="radio" name="haku" value="2">3泊4日
-            </label>
-        </div>
+        <form action="#">
+            <input type="radio" name="haku" value="0" id="haku0" checked/>
+            <label for="haku0">日帰り</label>
+            <input type="radio" name="haku" value="1" id="haku1" />
+            <label for="haku1">1泊2日</label>
+            <input type="radio" name="haku" value="2" id="haku2" />
+            <label for="haku2">2泊3日</label>
+            <input type="radio" name="haku" value="3" id="haku3" />
+            <label for="haku3">3泊4日</label>
+        </form>
         <hr>
         <h4>キーワード</h4>
         <div class="row">
-<label>
-    <input type="checkbox" name="keyword" value="温泉" checked>温泉 
-</label>
-<label>
-    <input type="checkbox" name="keyword" value="ホテル" >ホテル
-</label>
-<label>
-    <input type="checkbox" name="keyword" value="ペンション" >ペンション
-</label>
-<label>
-    <input type="checkbox" name="keyword" value="グルメ" checked>グルメ
-</label>
-<label>
-    <input type="checkbox" name="keyword" value="買い物" >買い物
-</label>
-<label>
-    <input type="checkbox" name="keyword" value="海" >海
-</label>
-<label>
-    <input type="checkbox" name="keyword" value="山" >山
-</label>
-<label>
-    <input type="checkbox" name="keyword" value="歴史" checked>歴史
-</label>
-            
+            <input type="checkbox" name="keyword" value="温泉" id="key_onsen" checked/>
+            <label for="key_onsen">温泉</label>
+            <input type="checkbox" name="keyword" value="ホテル" id="key_hotel" />
+            <label for="key_hotel">ホテル</label>
+            <input type="checkbox" name="keyword" value="ペンション" id="key_pen" />
+            <label for="key_pen">ペンション</label>
+            <input type="checkbox" name="keyword" value="グルメ" id="key_guru" checked/>
+            <label for="key_gru">グルメ</label>
+            <input type="checkbox" name="keyword" value="買い物" id="key_shopping" />
+            <label for="key_shopping">買い物</label>
+            <input type="checkbox" name="keyword" value="海" id="key_sea" />
+            <label for="key_sea">海</label>
+            <input type="checkbox" name="keyword" value="山" id="key_mountain" />
+            <label for="key_mountain">山</label>
+            <input type="checkbox" name="keyword" value="歴史" id="key_history" checked/>
+            <label for="key_history">歴史</label>
+
         </div>
 
         <hr>
         <h4>出発場所</h4>
         <p>出発地をクリックで指定してください。</p>
         <div id="map" style="width:100%; height:300px"></div>
+
+        <hr>
+        <h4>出発日時</h4>
+
+        <hr>
+        <h4>しおり</h4>
+
     </div>
 
-    <!-- jQuery first, then Tether, then Bootstrap JS. -->
     <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
         crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
-        crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
-        crossorigin="anonymous"></script>
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
 
     <script type="text/javascript" charset="utf-8" src="https://map.yahooapis.jp/js/V1/jsapi?appid=dj00aiZpPW0zYXBCRWFrMDlZTyZzPWNvbnN1bWVyc2VjcmV0Jng9MmI-"></script>
     <script type="text/javascript">
         window.onload = function () {
             var ymap = new Y.Map("map");
-            ymap.drawMap(new Y.LatLng(35.66572, 139.73100), 17, Y.LayerSetId.NORMAL);
+            ymap.drawMap(new Y.LatLng(35.161089, 136.882396), 17, Y.LayerSetId.NORMAL);
+
+            ymap.addControl(new Y.LayerSetControl());
+            ymap.addControl(new Y.ScaleControl());
+            ymap.addControl(new Y.SliderZoomControlHorizontal());
+            // ymap.addControl(new Y.SearchControl());
+
+            //クリックイベントを設定 
+            ymap.bind("click", function (latlng) {
+                ymap.addFeature(new Y.Marker(latlng));
+
+                setTimeout(function () {
+                    var p = new Y.LatLng(34.9686991, 137.61252087);
+                    ymap.setZoom(10, true, p, true);
+                    setTimeout(function () {
+                        ymap.addFeature(new Y.Label(p, "松風苑"));
+                        ymap.addFeature(new Y.Marker(p));
+                        setTimeout(function () {
+                            var p = new Y.LatLng(35.01470633, 138.9451893);
+                            ymap.panTo(p, true);
+                            setTimeout(function () {
+                                ymap.addFeature(new Y.Label(p, "大仁温泉"));
+                                ymap.addFeature(new Y.Marker(p));
+                                setTimeout(function () {
+                                    var p = new Y.LatLng(
+                                        35.2047307,
+                                        140.2819368);
+                                    ymap.panTo(p, true);
+                                    setTimeout(function () {
+                                        ymap.addFeature(new Y
+                                            .Label(p,
+                                                "勝浦つるんつるん温泉"
+                                            )
+                                        );
+                                        ymap.addFeature(new Y
+                                            .Marker(p));
+                                    }, 500);
+                                }, 500);
+                            }, 500);
+                        }, 500);
+                    }, 500);
+                }, 100);
+            });
         }
     </script>
 </body>
