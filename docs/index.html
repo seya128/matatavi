@@ -103,7 +103,7 @@
                     lat: vLat,
                     lng: vLng,
                     nights: 3,
-                    keywords: "癒し",
+                    keywords: "冒険",
                 },
                 function (data, status) {
                     console.log(data);
@@ -176,6 +176,28 @@
                 searchRun(resultApp[i], latlng);
 
             }
+
+            var i = data.length;
+            var nameFrom =  data[i-1].name1;
+            var nameTo = "到着";
+            var id = "keiro" + i;
+            var latlng = [{
+                    "lat": data[i-1].lat,
+                    "lng": data[i-1].lng
+                },
+                {
+                    "lat": startLat,
+                    "lng": startLng
+                }
+            ];
+            resultApp[i] = new expGuiCourse(document.getElementById(id));
+            resultApp[i].setConfigure("key", accessKey);
+            resultApp[i].setConfigure("ssl",
+                true);
+            resultApp[i].setConfigure("from", nameFrom);
+            resultApp[i].setConfigure("to", nameTo);
+            searchRun(resultApp[i], latlng);
+
         }
 
         function elemPoint(name, desc, id) {
