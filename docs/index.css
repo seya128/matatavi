@@ -77,3 +77,32 @@ APIのCSSを上書き
     height: 550px;
 }
 
+.center-box-keyword {
+    position: absolute;
+    box-sizing: border-box;
+    padding: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+    text-align: center;
+    width: 90%;
+    height: 400px;
+}
+
+
+#now-making {
+    position: absolute;
+    box-sizing: border-box;
+    font-size: 200%;
+    top: 30%;
+    left: 0;
+    right: 0;
+    margin: auto;
+    text-align: center;
+    width: 80%;
+    z-index: 1000;
+    padding: 1em;
+    background-color: orange;
+}
