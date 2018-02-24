@@ -73,7 +73,9 @@
     <script type="text/javascript" charset="utf-8" src="https://map.yahooapis.jp/js/V1/jsapi?appid=dj00aiZpPW0zYXBCRWFrMDlZTyZzPWNvbnN1bWVyc2VjcmV0Jng9MmI-"></script>
     <script type="text/javascript">
         var ymap = new Y.Map("map");
-        var latlngStart = new Y.LatLng(35.161089, 136.882396);
+        var startLat = 35.161089;
+        var startLng = 136.882396;
+        var latlngStart = new Y.LatLng(startLat, startLng);
 
         window.onload = function () {
             //init(); //エキスパート初期化
@@ -94,8 +96,8 @@
         }
 
         function clickMakeSiori() {
-            var vLat = 35.161089;
-            var vLng = 136.882396;
+            var vLat = startLat;
+            var vLng = startLng;
             // makeSiori(new Y.LatLng(35.161089, 136.882396));
             $.getJSON("http://www.cotogoto.ai/matatavi/sample", {
                     lat: vLat,
@@ -146,6 +148,33 @@
 
 
             for (var i = 0; i < data.length; i++) {
+                var nameFrom = "出発";
+                if (i > 0) nameFrom = data[i - 1].name1;
+                var nameTo = data[i].name1;
+                var id = "keiro" + i;
+
+                var latlng = [{
+                        "lat": startLat,
+                        "lng": startLng
+                    },
+                    {
+                        "lat": data[i].lat,
+                        "lng": data[i].lng
+                    }
+                ];
+                if (i > 0) {
+                    latlng[0].lat = data[i - 1].lat;
+                    latlng[0].lng = data[i - 1].lng;
+                }
+
+                resultApp[i] = new expGuiCourse(document.getElementById(id));
+                resultApp[i].setConfigure("key", accessKey);
+                resultApp[i].setConfigure("ssl", true);
+                resultApp[i].setConfigure("from", nameFrom);
+                resultApp[i].setConfigure("to", nameTo);
+
+                searchRun(resultApp[i], latlng);
+
             }
         }
 
@@ -157,7 +186,6 @@
                 '</div>' +
                 '<div id = "' + id + '">' + id + '</div>'
             );
-
         }
 
         function makeSiori(latlng) {
@@ -230,13 +258,13 @@
         /*
          * 探索ボタンの動作
          */
-        function searchRun(obj) {
+        function searchRun(obj, latlngs) {
             var searchWord = "";
             // 発着地リストを作成
             var viaList = "";
-            var dep = "35.1709194,136.8793482,wgs84"; // 名古屋駅の緯度経度
-            var arr = "33.5900493,130.4184218,wgs84"; // 博多駅の緯度経度
-            viaList = dep + ":" + arr;
+            viaList += latlngs[0].lat + "," + latlngs[0].lng + ",wgs84";
+            viaList += ":";
+            viaList += latlngs[1].lat + "," + latlngs[1].lng + ",wgs84";
 
             // 経路表示パーツ#1の場合
             searchWord += "viaList=" + viaList;
