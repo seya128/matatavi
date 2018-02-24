@@ -49,6 +49,7 @@
             <label for="key_history">歴史</label>
 
         </div>
+
         <hr>
         <a class="waves-effect waves-light btn-large" onclick="clickMakeSiori()">しおり作成</a>
 
@@ -59,34 +60,25 @@
 
         <hr>
         <h4>しおり</h4>
-        <section>
-            <div>スタート</div>
-            <div id="result1"></div>
-            <hr>
-            <div>ポイント１</div>
-            <div id="result2"></div>
-            <hr>
-            <div>ポイント２</div>
-            <div id="result3"></div>
-            <hr>  </section>
-
+        <section id="siori">
+        </section>
 
     </div>
 
     <!-- Compiled and minified JavaScript -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
     <script src="https://rawgit.com/EkispertWebService/GUI/ed686b9d12d/expGuiCourse/expGuiCourse.js"></script>
 
     <script type="text/javascript" charset="utf-8" src="https://map.yahooapis.jp/js/V1/jsapi?appid=dj00aiZpPW0zYXBCRWFrMDlZTyZzPWNvbnN1bWVyc2VjcmV0Jng9MmI-"></script>
-    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
-        crossorigin="anonymous"></script>
     <script type="text/javascript">
         var ymap = new Y.Map("map");
+        var latlngStart = new Y.LatLng(35.161089, 136.882396);
 
         window.onload = function () {
-            init(); //エキスパート初期化
+            //init(); //エキスパート初期化
 
-            ymap.drawMap(new Y.LatLng(35.161089, 136.882396), 17, Y.LayerSetId.NORMAL);
+            ymap.drawMap(latlngStart, 17, Y.LayerSetId.NORMAL);
 
             ymap.addControl(new Y.LayerSetControl());
             ymap.addControl(new Y.ScaleControl());
@@ -94,29 +86,78 @@
             // ymap.addControl(new Y.SearchControl());
 
             //クリックイベントを設定 
-            ymap.bind("click", function (latlng) {
-                makeSiori(latlng);
-            });
+            // ymap.bind("click", function (latlng) {
+            //     makeSiori(latlng);
+            // });
+
+            // console.log($('#map'));
         }
 
         function clickMakeSiori() {
             var vLat = 35.161089;
             var vLng = 136.882396;
             // makeSiori(new Y.LatLng(35.161089, 136.882396));
-            $.ajax({
-                    url: 'http://www.cotogoto.ai/matatavi/sample',
-                    type: 'get',
-                    dataType: 'json',
-                    data: {
-                        lat: vLat,
-                        lng: vLng,
-                        nights: 3,
-                        keywords: "癒し",
-                    },
-                })
-                .done(function (response) {
-                    console.log(response.data);
-                });
+            $.getJSON("http://www.cotogoto.ai/matatavi/sample", {
+                    lat: vLat,
+                    lng: vLng,
+                    nights: 3,
+                    keywords: "癒し",
+                },
+                function (data, status) {
+                    console.log(data);
+
+                    //地図アニメーションスタート
+                    startMapAnimation(data);
+                }
+            );
+        }
+
+        function startMapAnimation(data) {
+            ymap.addFeature(new Y.Marker(latlngStart));
+            nextMapAnimation(0, data);
+
+        }
+
+        function nextMapAnimation(count, data) {
+            console.log("count:" + count);
+            setTimeout(function () {
+                var p = new Y.LatLng(data[count].lat, data[count].lng);
+                if (count == 0)
+                    ymap.setZoom(9, true, p, true);
+                else
+                    ymap.panTo(p, true);
+                ymap.addFeature(new Y.Label(p, data[count].name1));
+                ymap.addFeature(new Y.Marker(p));
+
+                if (count + 1 < data.length) {
+                    nextMapAnimation(count + 1, data);
+                } else {
+                    makeSioriAll(data);
+                }
+            }, 500);
+        }
+
+        function makeSioriAll(data) {
+            elemPoint("出発", "", "keiro0");
+            for (var i = 0; i < data.length; i++) {
+                elemPoint(data[i].name1, data[i].descs, "keiro" + (i + 1));
+            }
+            elemPoint("到着", "", "goal");
+
+
+            for (var i = 0; i < data.length; i++) {
+            }
+        }
+
+        function elemPoint(name, desc, id) {
+            $('#siori').append(
+                '<div class = "point" > ' +
+                '<h3 class = "name" > ' + name + '</h3>' +
+                '<div class = "desc" > ' + desc + ' </div>' +
+                '</div>' +
+                '<div id = "' + id + '">' + id + '</div>'
+            );
+
         }
 
         function makeSiori(latlng) {
@@ -141,9 +182,12 @@
                                 ymap.panTo(p,
                                     true);
                                 setTimeout(function () {
-                                    ymap.addFeature(new Y.Label(p,
-                                        "勝浦つるんつるん温泉"));
-                                    ymap.addFeature(new Y.Marker(p));
+                                    ymap.addFeature(new Y.Label(
+                                        p,
+                                        "勝浦つるんつるん温泉"
+                                    ));
+                                    ymap.addFeature(new Y.Marker(
+                                        p));
                                     searchRun(resultApp[0]);
                                     searchRun(resultApp[1]);
                                     searchRun(resultApp[2]);
