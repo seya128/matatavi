@@ -17,7 +17,7 @@ APIのCSSを上書き
 .row {
     box-sizing: border-box;
     padding: 0;
-    margin: 0;    
+    margin: 0;
 }
 
 .btn {
@@ -56,11 +56,11 @@ APIのCSSを上書き
     top: 0;
     bottom: 0;
     right: 0;
-    left: 0;    
+    left: 0;
     margin: auto;
     text-align: center;
     width: 90%;
-    height: 200px;
+    height: 450px;
 }
 
 .center-box-period {
