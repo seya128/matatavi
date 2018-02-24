@@ -35,6 +35,11 @@ APIのCSSを上書き
     background-color: rgba(255, 166, 0, 0.5);
 }
 
+.btn-checked {
+    background-color: orange;
+    color: white;
+}
+
 .page {
     position: relative;
     box-sizing: border-box;
@@ -69,6 +74,6 @@ APIのCSSを上書き
     margin: auto;
     text-align: center;
     width: 90%;
-    height: 400px;
+    height: 550px;
 }
 
