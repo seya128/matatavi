@@ -1,0 +1,36 @@
+/*
+
+APIのCSSを上書き
+
+*/
+
+
+
+
+
+
+/*
+
+このアプリケーション用の新しいCSS
+
+*/
+.row {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;    
+}
+
+.btn {
+    font-size: 120%;
+    border: 1px solid orange;
+    padding: 1em 2em;
+    margin: 0.5em 0.5em;
+    cursor: pointer;
+    box-sizing: border-box;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.btn:active {
+    background-color: rgba(255, 166, 0, 0.5);
+}

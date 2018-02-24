@@ -9,7 +9,10 @@
     <link rel="stylesheet" href="css/flexboxgrid/flexboxgrid.min.css">
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://rawgit.com/EkispertWebService/GUI/ed686b9d12d/expGuiCourse/expCss/expGuiCourse.css">
+
+    <link rel="stylesheet" href="index.css">
 </head>
+
 
 <body>
 
@@ -52,11 +55,11 @@
         </div>
 
         <hr>
-        <a class="waves-effect waves-light btn-large" onclick="clickMakeSiori()">しおり作成</a>
+        <div class="row">
+            <a class="btn btn-make" onclick="clickMakeSiori()">しおり作成</a>
+        </div>
 
         <hr>
-        <h4>出発場所</h4>
-        <p>出発地をクリックで指定してください。</p>
         <div id="map" style="width:100%; height:300px"></div>
 
         <hr>
@@ -179,12 +182,12 @@
             }
 
             var i = data.length;
-            var nameFrom =  data[i-1].name1;
+            var nameFrom = data[i - 1].name1;
             var nameTo = "到着";
             var id = "keiro" + i;
             var latlng = [{
-                    "lat": data[i-1].lat,
-                    "lng": data[i-1].lng
+                    "lat": data[i - 1].lat,
+                    "lng": data[i - 1].lng
                 },
                 {
                     "lat": startLat,
