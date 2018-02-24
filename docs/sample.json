@@ -1,0 +1,366 @@
+sample = [{
+    "building": null,
+    "category": ["遊ぶ", "温泉"],
+    "city": "郡上市",
+    "descs": ["奥長良の大自然が織りなす四季折々の時間\u003Cbr\u003E長良川の清流のほとり、四季折々の風景をのんびりゆったりと眺めながら心も体も芯までリラックスできる名湯、秘湯。\u003Cbr\u003E「極上の癒し」が疲れを解きほぐしてくれる温泉です。"],
+    "email": null,
+    "fax": null,
+    "lat": 35.945964,
+    "line": [{
+        "stopStationCount": "0",
+        "timeOnBoard": "4",
+        "exhaustCO2": "0",
+        "exhaustCO2atPassengerCar": "0",
+        "distance": "0",
+        "ArrivalState": {
+            "Type": "normal",
+            "Datetime": {
+                "text": "2018-02-24T14:02:00+09:00",
+                "operation": "today"
+            }
+        },
+        "TimeReliability": "average",
+        "DepartureState": {
+            "Type": "normal",
+            "Datetime": {
+                "text": "2018-02-24T13:58:00+09:00",
+                "operation": "today"
+            }
+        },
+        "Color": "000000000"
+    }, {
+        "stopStationCount": "2",
+        "teiki3Index": "1",
+        "teiki6Index": "1",
+        "timeOnBoard": "6",
+        "exhaustCO2": "90",
+        "fareIndex": "1",
+        "exhaustCO2atPassengerCar": "252",
+        "distance": "15",
+        "teiki1Index": "1",
+        "Name": "名古屋市営バス・栄１１(栄－如意車庫前・西部医療センター経由)・栄行",
+        "Type": {
+            "text": "bus",
+            "detail": "local"
+        },
+        "ArrivalState": {
+            "no": "3",
+            "Type": "normal",
+            "Datetime": {
+                "text": "2018-02-24T14:09:00+09:00",
+                "operation": "today"
+            }
+        },
+        "Destination": "栄／名古屋市営バス",
+        "TypicalName": "名古屋市営バス・栄１１(栄－如意車庫前・西部医療センター経由)",
+        "TimeReliability": "onTimetable",
+        "DepartureState": {
+            "Type": "normal",
+            "Datetime": {
+                "text": "2018-02-24T14:03:00+09:00",
+                "operation": "today"
+            }
+        },
+        "Color": "170235130"
+    }, {
+        "stopStationCount": "0",
+        "teiki3Index": "1",
+        "teiki6Index": "1",
+        "timeOnBoard": "6",
+        "exhaustCO2": "0",
+        "exhaustCO2atPassengerCar": "0",
+        "distance": "0",
+        "teiki1Index": "1",
+        "Name": "徒歩",
+        "Type": "walk",
+        "ArrivalState": {
+            "Type": "normal",
+            "Datetime": {
+                "text": "2018-02-24T14:19:00+09:00",
+                "operation": "today"
+            }
+        },
+        "TypicalName": "徒歩",
+        "TimeReliability": "average",
+        "DepartureState": {
+            "Type": "normal",
+            "Datetime": {
+                "text": "2018-02-24T14:13:00+09:00",
+                "operation": "today"
+            }
+        },
+        "Color": "230230230"
+    }, {
+        "stopStationCount": "2",
+        "teiki3Index": "1",
+        "teiki6Index": "1",
+        "timeOnBoard": "5",
+        "track": "railway",
+        "exhaustCO2": "52",
+        "fareIndex": "2",
+        "exhaustCO2atPassengerCar": "403",
+        "distance": "24",
+        "teiki1Index": "1",
+        "Name": "名古屋市営桜通線・中村区役所行",
+        "Type": "train",
+        "ArrivalState": {
+            "no": "4",
+            "Type": "normal",
+            "Datetime": {
+                "text": "2018-02-24T14:31:00+09:00",
+                "operation": "today"
+            }
+        },
+        "Destination": "中村区役所",
+        "TimeReliability": "onTimetable",
+        "DepartureState": {
+            "no": "4",
+            "Type": "normal",
+            "Datetime": {
+                "text": "2018-02-24T14:26:00+09:00",
+                "operation": "today"
+            }
+        },
+        "Color": "220025025"
+    }, {
+        "stopStationCount": "1",
+        "chargeIndex": "2",
+        "timeOnBoard": "40",
+        "track": "railway",
+        "exhaustCO2": "1267",
+        "fareIndex": "3",
+        "exhaustCO2atPassengerCar": "9676",
+        "distance": "576",
+        "Name": "ＪＲ特急ワイドビューひだ",
+        "Type": {
+            "text": "train",
+            "detail": "limitedExpress"
+        },
+        "ArrivalState": {
+            "no": "3",
+            "Type": "normal",
+            "Datetime": {
+                "text": "2018-02-24T15:28:00+09:00",
+                "operation": "today"
+            }
+        },
+        "Destination": "富山",
+        "Number": "13",
+        "TimeReliability": "onTimetable",
+        "DepartureState": {
+            "no": "11",
+            "Type": "normal",
+            "Datetime": {
+                "text": "2018-02-24T14:48:00+09:00",
+                "operation": "today"
+            }
+        },
+        "Color": "255125008"
+    }, {
+        "stopStationCount": "36",
+        "teiki3Index": "2",
+        "teiki6Index": "2",
+        "timeOnBoard": "128",
+        "track": "railway",
+        "exhaustCO2": "1586",
+        "fareIndex": "4",
+        "exhaustCO2atPassengerCar": "12112",
+        "distance": "721",
+        "teiki1Index": "2",
+        "Name": "長良川鉄道・北濃行",
+        "Type": "train",
+        "ArrivalState": {
+            "Type": "normal",
+            "Datetime": {
+                "text": "2018-02-24T17:40:00+09:00",
+                "operation": "today"
+            }
+        },
+        "Destination": "北濃",
+        "TimeReliability": "onTimetable",
+        "DepartureState": {
+            "Type": "normal",
+            "Datetime": {
+                "text": "2018-02-24T15:32:00+09:00",
+                "operation": "today"
+            }
+        },
+        "Color": "200030085"
+    }, {
+        "stopStationCount": "0",
+        "timeOnBoard": "52",
+        "exhaustCO2": "0",
+        "exhaustCO2atPassengerCar": "0",
+        "distance": "0",
+        "ArrivalState": {
+            "Type": "normal",
+            "Datetime": {
+                "text": "2018-02-24T18:33:00+09:00",
+                "operation": "today"
+            }
+        },
+        "TimeReliability": "average",
+        "DepartureState": {
+            "Type": "normal",
+            "Datetime": {
+                "text": "2018-02-24T17:41:00+09:00",
+                "operation": "today"
+            }
+        },
+        "Color": "000000000"
+    }],
+    "lng": 136.87185,
+    "name1": "湯の平温泉",
+    "name2": null,
+    "phone": "0575-72-6455",
+    "point": [{
+        "geoPoint": null,
+        "name": "35.181446,136.906398,tokyo",
+        "prefecture": null,
+        "station": null
+    }, {
+        "geoPoint": {
+            "longi": "136.54.27.0",
+            "lati": "35.11.1.59",
+            "longi_d": "136.9075",
+            "gcs": "tokyo",
+            "lati_d": "35.183777"
+        },
+        "name": null,
+        "prefecture": {
+            "code": "23",
+            "Name": "愛知県"
+        },
+        "station": {
+            "code": "41051",
+            "Name": "名城町／名古屋市営バス",
+            "Type": {
+                "text": "bus",
+                "detail": "local"
+            },
+            "Yomi": "めいじょうちょう"
+        }
+    }, {
+        "geoPoint": {
+            "longi": "136.54.33.69",
+            "lati": "35.10.12.39",
+            "longi_d": "136.909361",
+            "gcs": "tokyo",
+            "lati_d": "35.170111"
+        },
+        "name": null,
+        "prefecture": {
+            "code": "23",
+            "Name": "愛知県"
+        },
+        "station": {
+            "code": "40342",
+            "Name": "桜通大津／名古屋市営バス",
+            "Type": {
+                "text": "bus",
+                "detail": "local"
+            },
+            "Yomi": "さくらどおりおおつ"
+        }
+    }, {
+        "geoPoint": {
+            "longi": "136.54.40.59",
+            "lati": "35.10.13.50",
+            "longi_d": "136.911277",
+            "gcs": "tokyo",
+            "lati_d": "35.170417"
+        },
+        "name": null,
+        "prefecture": {
+            "code": "23",
+            "Name": "愛知県"
+        },
+        "station": {
+            "code": "25123",
+            "Name": "久屋大通",
+            "Type": "train",
+            "Yomi": "ひさやおおどおり"
+        }
+    }, {
+        "geoPoint": {
+            "longi": "136.53.8.0",
+            "lati": "35.10.3.0",
+            "longi_d": "136.885556",
+            "gcs": "tokyo",
+            "lati_d": "35.1675"
+        },
+        "name": null,
+        "prefecture": {
+            "code": "23",
+            "Name": "愛知県"
+        },
+        "station": {
+            "code": "25077",
+            "Name": "名古屋",
+            "Type": "train",
+            "Yomi": "なごや"
+        }
+    }, {
+        "geoPoint": {
+            "longi": "137.1.21.0",
+            "lati": "35.26.33.0",
+            "longi_d": "137.0225",
+            "gcs": "tokyo",
+            "lati_d": "35.4425"
+        },
+        "name": null,
+        "prefecture": {
+            "code": "21",
+            "Name": "岐阜県"
+        },
+        "station": {
+            "code": "24586",
+            "Name": "美濃太田",
+            "Type": "train",
+            "Yomi": "みのおおた"
+        }
+    }, {
+        "geoPoint": {
+            "longi": "136.49.57.89",
+            "lati": "35.55.37.19",
+            "longi_d": "136.83275",
+            "gcs": "tokyo",
+            "lati_d": "35.927"
+        },
+        "name": null,
+        "prefecture": {
+            "code": "21",
+            "Name": "岐阜県"
+        },
+        "station": {
+            "code": "24563",
+            "Name": "北濃",
+            "Type": "train",
+            "Yomi": "ほくのう"
+        }
+    }, {
+        "geoPoint": null,
+        "name": "35.9459640,136.8718500,tokyo",
+        "prefecture": null,
+        "station": null
+    }],
+    "postalCode": "501-5303",
+    "pref": "岐阜県",
+    "price": {
+        "areRevisionStatus": null,
+        "fromLineIndex": null,
+        "kind": "FareSummary",
+        "name": null,
+        "nikukanteikiIndex": null,
+        "oneway": "3240",
+        "rate": null,
+        "relationIndex": null,
+        "round": "6480",
+        "selected": null,
+        "toLineIndex": null,
+        "vehicleIndex": null
+    },
+    "street": "高鷲町大鷲1792",
+    "url": null
+}];
+

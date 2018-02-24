@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>経路探索サンプル</title>
+    <link rel="stylesheet" href="https://rawgit.com/EkispertWebService/GUI/ed686b9d12d/expGuiCourse/expCss/expGuiCourse.css">
+    <script src="https://rawgit.com/EkispertWebService/GUI/ed686b9d12d/expGuiCourse/expGuiCourse.js"></script>
+    <script type="text/javascript">
+
+        var accessKey = "eBBWPyXMYduCN759";
+        var resultApp; //経路結果表示パーツ
+
+        /*
+         * パーツを初期化
+         */
+        function init() {
+
+            // 経路表示パーツ初期化
+            resultApp = new expGuiCourse(document.getElementById("result"));
+            resultApp.setConfigure("key", accessKey);
+            resultApp.setConfigure("ssl", true);
+            resultApp.setConfigure("from", "いき");
+            resultApp.setConfigure("to", "かえり");
+        }
+
+        /*
+         * 探索ボタンの動作
+         */
+        function searchRun(teikiFlag) {
+            var searchWord = "";
+            // 発着地リストを作成
+            var viaList = "";
+            var dep = "35.1709194,136.8793482,wgs84"; // 名古屋駅の緯度経度
+            var arr = "33.5900493,130.4184218,wgs84"; // 博多駅の緯度経度
+            viaList = dep + ":" + arr;
+
+            // 経路表示パーツ#1の場合
+            searchWord += "viaList=" + viaList;
+            // 探索種別 ※PLAIN固定
+            searchWord += '&searchType=plain';
+
+            // 探索を実行
+            resultApp.search(searchWord, resultApp.PRICE_ONEWAY, function (isSuccess) {
+                if (!isSuccess) {
+                    alert("探索結果が取得できませんでした");
+                }
+            });
+        }
+
+    </script>
+</head>
+
+<body onLoad="Javascript:init();">
+
+
+
+    <!-- 探索実行ボタン -->
+    <input type="button" value="探索" onClick="Javascript:searchRun(false);">
+
+    <!-- 経路表示パーツ -->
+    <div id="result"></div>
+
+</body>
+
+</html>

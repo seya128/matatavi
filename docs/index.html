@@ -8,6 +8,7 @@
 
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <link rel="stylesheet" href="https://rawgit.com/EkispertWebService/GUI/ed686b9d12d/expGuiCourse/expCss/expGuiCourse.css">
 </head>
 
 <body>
@@ -48,6 +49,8 @@
             <label for="key_history">歴史</label>
 
         </div>
+        <hr>
+        <a class="waves-effect waves-light btn-large" onclick="clickMakeSiori()">しおり作成</a>
 
         <hr>
         <h4>出発場所</h4>
@@ -55,22 +58,34 @@
         <div id="map" style="width:100%; height:300px"></div>
 
         <hr>
-        <h4>出発日時</h4>
-
-        <hr>
         <h4>しおり</h4>
+        <section>
+            <div>スタート</div>
+            <div id="result1"></div>
+            <hr>
+            <div>ポイント１</div>
+            <div id="result2"></div>
+            <hr>
+            <div>ポイント２</div>
+            <div id="result3"></div>
+            <hr>  </section>
+
 
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
-        crossorigin="anonymous"></script>
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+    <script src="https://rawgit.com/EkispertWebService/GUI/ed686b9d12d/expGuiCourse/expGuiCourse.js"></script>
 
     <script type="text/javascript" charset="utf-8" src="https://map.yahooapis.jp/js/V1/jsapi?appid=dj00aiZpPW0zYXBCRWFrMDlZTyZzPWNvbnN1bWVyc2VjcmV0Jng9MmI-"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
+        crossorigin="anonymous"></script>
     <script type="text/javascript">
+        var ymap = new Y.Map("map");
+
         window.onload = function () {
-            var ymap = new Y.Map("map");
+            init(); //エキスパート初期化
+
             ymap.drawMap(new Y.LatLng(35.161089, 136.882396), 17, Y.LayerSetId.NORMAL);
 
             ymap.addControl(new Y.LayerSetControl());
@@ -80,39 +95,115 @@
 
             //クリックイベントを設定 
             ymap.bind("click", function (latlng) {
-                ymap.addFeature(new Y.Marker(latlng));
+                makeSiori(latlng);
+            });
+        }
 
+        function clickMakeSiori() {
+            var vLat = 35.161089;
+            var vLng = 136.882396;
+            // makeSiori(new Y.LatLng(35.161089, 136.882396));
+            $.ajax({
+                    url: 'http://www.cotogoto.ai/matatavi/sample',
+                    type: 'get',
+                    dataType: 'json',
+                    data: {
+                        lat: vLat,
+                        lng: vLng,
+                        nights: 3,
+                        keywords: "癒し",
+                    },
+                })
+                .done(function (response) {
+                    console.log(response.data);
+                });
+        }
+
+        function makeSiori(latlng) {
+            ymap.addFeature(new Y.Marker(latlng));
+            setTimeout(function () {
+                var p = new Y.LatLng(34.9686991, 137.61252087);
+                ymap.setZoom(9,
+                    true, p, true);
                 setTimeout(function () {
-                    var p = new Y.LatLng(34.9686991, 137.61252087);
-                    ymap.setZoom(9, true, p, true);
+                    ymap.addFeature(new Y.Label(p, "松風苑"));
+                    ymap.addFeature(new Y.Marker(p));
                     setTimeout(function () {
-                        ymap.addFeature(new Y.Label(p, "松風苑"));
-                        ymap.addFeature(new Y.Marker(p));
+                        var p = new Y.LatLng(35.01470633, 138.9451893);
+                        ymap.panTo(p, true);
                         setTimeout(function () {
-                            var p = new Y.LatLng(35.01470633, 138.9451893);
-                            ymap.panTo(p, true);
+                            ymap.addFeature(new Y.Label(p,
+                                "大仁温泉"));
+                            ymap.addFeature(new Y.Marker(p));
                             setTimeout(function () {
-                                ymap.addFeature(new Y.Label(p, "大仁温泉"));
-                                ymap.addFeature(new Y.Marker(p));
+                                var p = new Y.LatLng(35.2047307,
+                                    140.2819368);
+                                ymap.panTo(p,
+                                    true);
                                 setTimeout(function () {
-                                    var p = new Y.LatLng(
-                                        35.2047307,
-                                        140.2819368);
-                                    ymap.panTo(p, true);
-                                    setTimeout(function () {
-                                        ymap.addFeature(new Y
-                                            .Label(p,
-                                                "勝浦つるんつるん温泉"
-                                            )
-                                        );
-                                        ymap.addFeature(new Y
-                                            .Marker(p));
-                                    }, 500);
+                                    ymap.addFeature(new Y.Label(p,
+                                        "勝浦つるんつるん温泉"));
+                                    ymap.addFeature(new Y.Marker(p));
+                                    searchRun(resultApp[0]);
+                                    searchRun(resultApp[1]);
+                                    searchRun(resultApp[2]);
                                 }, 500);
                             }, 500);
                         }, 500);
                     }, 500);
-                }, 100);
+                }, 500);
+            }, 100);
+        }
+
+        var accessKey = "eBBWPyXMYduCN759";
+        var resultApp = []; //経路結果表示パーツ
+
+        /*
+         * パーツを初期化
+         */
+        function init() {
+
+            // 経路表示パーツ初期化
+            resultApp[0] = new expGuiCourse(document.getElementById("result1"));
+            resultApp[0].setConfigure("key", accessKey);
+            resultApp[0].setConfigure("ssl", true);
+            resultApp[0].setConfigure("from", "スタート地");
+            resultApp[0].setConfigure("to", "ポイント１");
+            resultApp[1] = new expGuiCourse(document.getElementById("result2"));
+            resultApp[1].setConfigure("key", accessKey);
+            resultApp[1].setConfigure("ssl",
+                true);
+            resultApp[1].setConfigure("from", "ポイント１");
+            resultApp[1].setConfigure("to", "ポイント２");
+            resultApp[2] = new expGuiCourse(document.getElementById("result3"));
+            resultApp[2].setConfigure("key", accessKey);
+            resultApp[2].setConfigure("ssl",
+                true);
+            resultApp[2].setConfigure("from", "ポイント２");
+            resultApp[2].setConfigure("to", "ゴール");
+        }
+
+        /*
+         * 探索ボタンの動作
+         */
+        function searchRun(obj) {
+            var searchWord = "";
+            // 発着地リストを作成
+            var viaList = "";
+            var dep = "35.1709194,136.8793482,wgs84"; // 名古屋駅の緯度経度
+            var arr = "33.5900493,130.4184218,wgs84"; // 博多駅の緯度経度
+            viaList = dep + ":" + arr;
+
+            // 経路表示パーツ#1の場合
+            searchWord += "viaList=" + viaList;
+            // 探索種別 ※PLAIN固定
+            searchWord += '&searchType=plain';
+
+            // 探索を実行
+            obj.search(searchWord, resultApp.PRICE_ONEWAY, function (isSuccess) {
+                if (!isSuccess) {
+                    alert("探索結果が取得できませんでした");
+                }
             });
         }
     </script>
