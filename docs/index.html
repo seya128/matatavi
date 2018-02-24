@@ -18,24 +18,28 @@
 
     <div class="container">
         <section class="page" id="top">
-            <h1>Matatavi</h1>
-            <p>説明</p>
-            <a class="btn" onclick="scrollPage('#period')">START</a>
+            <div class="center-box-top">
+                <h1>Matatavi</h1>
+                <p>説明</p>
+                <a class="btn" onclick="scrollPage('#period')">START</a>
+            </div>
         </section>
         <hr>
         <section class="page" id="period">
-            <h4>日数</h4>
-            <p>日数を選んでください</p>
-            <form action="#">
-                <input type="radio" name="haku" value="0" id="haku0" checked/>
-                <label for="haku0">日帰り</label>
-                <input type="radio" name="haku" value="1" id="haku1" />
-                <label for="haku1">1泊2日</label>
-                <input type="radio" name="haku" value="2" id="haku2" />
-                <label for="haku2">2泊3日</label>
-                <input type="radio" name="haku" value="3" id="haku3" />
-                <label for="haku3">3泊4日</label>
-            </form>
+            <div class="center-box-period">
+                <h4>日数</h4>
+                <p>日数を選んでください</p>
+                <form action="#">
+                    <input type="radio" name="haku" value="0" id="haku0" checked/>
+                    <label for="haku0">日帰り</label>
+                    <input type="radio" name="haku" value="1" id="haku1" />
+                    <label for="haku1">1泊2日</label>
+                    <input type="radio" name="haku" value="2" id="haku2" />
+                    <label for="haku2">2泊3日</label>
+                    <input type="radio" name="haku" value="3" id="haku3" />
+                    <label for="haku3">3泊4日</label>
+                </form>
+            </div>
         </section>
         <hr>
         <h4>キーワード</h4>
@@ -88,7 +92,7 @@
 
         window.onload = function () {
             scrollPage('#top');
-            
+
             ymap.drawMap(latlngStart, 17, Y.LayerSetId.NORMAL);
 
             ymap.addControl(new Y.LayerSetControl());
@@ -100,7 +104,9 @@
 
         // selector位置までスクロール
         function scrollPage(selector) {
-            $("html,body").animate({ scrollTop: $(selector).offset().top });
+            $("html,body").animate({
+                scrollTop: $(selector).offset().top
+            });
         }
 
         function clickMakeSiori() {

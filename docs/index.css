@@ -36,9 +36,39 @@ APIのCSSを上書き
 }
 
 .page {
+    position: relative;
     box-sizing: border-box;
     padding: 0;
     margin: 0;
     width: 100%;
     height: 100vh;
 }
+
+.center-box-top {
+    position: absolute;
+    box-sizing: border-box;
+    padding: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;    
+    margin: auto;
+    text-align: center;
+    width: 90%;
+    height: 200px;
+}
+
+.center-box-period {
+    position: absolute;
+    box-sizing: border-box;
+    padding: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+    text-align: center;
+    width: 90%;
+    height: 400px;
+}
+
