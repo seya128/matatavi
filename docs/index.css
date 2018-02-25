@@ -70,7 +70,15 @@ APIのCSSを上書き
     margin: auto;
     text-align: center;
     width: 90%;
-    height: 550px;
+    height: 650px;
+}
+
+.center-box-period-image {
+    background-image: url("./img/title-bg.png");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center top;
+    background-size:contain;
 }
 
 .center-box-keyword-image {
@@ -78,6 +86,7 @@ APIのCSSを上書き
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center top;
+    background-size:contain;
 }
 
 .center-box-keyword {
