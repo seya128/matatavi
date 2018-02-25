@@ -112,9 +112,18 @@
 
     <script type="text/javascript" charset="utf-8" src="https://map.yahooapis.jp/js/V1/jsapi?appid=dj00aiZpPW0zYXBCRWFrMDlZTyZzPWNvbnN1bWVyc2VjcmV0Jng9MmI-"></script>
     <script type="text/javascript">
-        var ymap = new Y.Map("map");
+        var ymap = null;
         var startLat = 35.161089;
         var startLng = 136.882396;
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                // 取得成功した場合
+                function (position) {
+                    startLat = position.coords.latitude;
+                    startLng = position.coords.longitude;
+                }
+            );
+        }
         var latlngStart = new Y.LatLng(startLat, startLng);
         var oldLatLng = {};
         var rect = {
@@ -136,6 +145,8 @@
 
         window.onload = function () {
             scrollPage('#top');
+
+            ymap = new Y.Map("map");
 
             ymap.drawMap(latlngStart, 17, Y.LayerSetId.NORMAL);
 
