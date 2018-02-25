@@ -106,13 +106,23 @@ APIのCSSを上書き
 /* プランタイトル */
 
 #plan-title {
-    box-sizing: border-box;
+    /* box-sizing: border-box;
     text-align: center;
     background-color: orange;
     color: white;
     width: 100%;
     margin: 3px 0 3px 0;
-    padding: 0 0.5em;
+    padding: 0 0.5em; */
+
+    text-align: center;
+    width: 100%;
+    margin: 0;
+    padding: 9px;
+    background-image: url("./img/title-bg.png");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center top;
+    background-size:contain;
 }
 
 /* 作成中 */
@@ -225,6 +235,19 @@ APIのCSSを上書き
     max-height: 0px;
     overflow-y: hidden;
     transition: all 0.5s 0s;
+}
+.expGuiCoursePhone .exp_route .exp_summary .exp_row .exp_title {
+    float: left;
+    clear: both;
+    margin: 0.3em 0.7em 0 0.2em;
+    padding: 3px;
+    width: 5em;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    background-color: #666;
+    color: #FFFFFF;
+    font-weight: bold;
+    font-size: 1em;
 }
 
 /* */
