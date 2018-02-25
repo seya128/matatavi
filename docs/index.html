@@ -116,10 +116,22 @@
         var startLat = 35.161089;
         var startLng = 136.882396;
         var latlngStart = new Y.LatLng(startLat, startLng);
+        var oldLatLng = {};
+        var rect = {
+            "min": {
+                "lat": startLat,
+                "lng": startLng
+            },
+            "max": {
+                "lat": startLat,
+                "lng": startLng
+            }
+        }
 
         var nights = 0;
         var periodText = "";
         var keywords = "";
+
 
 
         window.onload = function () {
@@ -196,6 +208,8 @@
         //地図アニメーション開始
         function startMapAnimation(data) {
             ymap.addFeature(new Y.Marker(latlngStart));
+            oldLatLng = latlngStart;
+
             makeSioriPoint(-1, data);
             setTimeout(
                 nextMapAnimation(0, data), 1000);
@@ -205,16 +219,41 @@
         function nextMapAnimation(count, data) {
             console.log("count:" + count);
             setTimeout(function () {
-                var p = new Y.LatLng(data[count].lat, data[count].lng);
+                var p = latlngStart;
+                var name = "GOAL"
+                if (count < data.length) {
+                    p = new Y.LatLng(data[count].lat, data[count].lng);
+                    name = data[count].name1;
+                }
+
                 if (count == 0)
                     ymap.setZoom(9, true, p, true);
                 else
                     ymap.panTo(p, true);
-                ymap.addFeature(new Y.Label(p, data[count].name1));
+                ymap.addFeature(new Y.Label(p, name));
                 ymap.addFeature(new Y.Marker(p));
+
+                var style = new Y.Style("ffa500", 8, 0.5);
+                var latlngs = [oldLatLng, p];
+                var polyline = new Y.Polyline(latlngs, {
+                    strokeStyle: style
+                });
+                ymap.addFeature(polyline);
+
+                oldLatLng = p;
+
+                if (p.lat()<rect.min.lat)
+                    rect.min.lat = p.lat();
+                else if (p.lat() > rect.max.lat)
+                    rect.max.lat = p.lat();
+                if (p.lng() < rect.min.lng)
+                    rect.min.lng = p.lng();
+                else if (p.lng() > rect.max.lng)
+                    rect.max.lng = p.lng();
+
                 makeSioriPoint(count, data);
 
-                if (count + 1 < data.length) {
+                if (count + 1 <= data.length) {
                     nextMapAnimation(count + 1, data);
                 } else {
                     makeSioriAll(data);
@@ -225,11 +264,11 @@
         //しおりポイント表示
         function makeSioriPoint(count, data) {
             if (count < 0) {
-                elemPoint("出発", "", "keiro0");
+                elemPoint("START", "", "keiro0");
             } else if (count < data.length) {
                 elemPoint(data[count].name1, data[count].descs, "keiro" + (count + 1));
             } else if (count == data.length) {
-                elemPoint("到着", "", "goal");
+                elemPoint("GOAL", "", "goal");
             }
         }
 
