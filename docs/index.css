@@ -236,5 +236,18 @@ APIのCSSを上書き
     overflow-y: hidden;
     transition: all 0.5s 0s;
 }
+.expGuiCoursePhone .exp_route .exp_summary .exp_row .exp_title {
+    float: left;
+    clear: both;
+    margin: 0.3em 0.7em 0 0.2em;
+    padding: 3px;
+    width: 5em;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    background-color: #666;
+    color: #FFFFFF;
+    font-weight: bold;
+    font-size: 1em;
+}
 
 /* */
