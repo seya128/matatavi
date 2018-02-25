@@ -115,15 +115,6 @@
         var ymap = null;
         var startLat = 35.161089;
         var startLng = 136.882396;
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(
-                // 取得成功した場合
-                function (position) {
-                    startLat = position.coords.latitude;
-                    startLng = position.coords.longitude;
-                }
-            );
-        }
         var latlngStart = new Y.LatLng(startLat, startLng);
         var oldLatLng = {};
         var rect = {
@@ -135,7 +126,29 @@
                 "lat": startLat,
                 "lng": startLng
             }
+        };
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                // 取得成功した場合
+                function (position) {
+                    startLat = position.coords.latitude;
+                    startLng = position.coords.longitude;
+                    latlngStart = new Y.LatLng(startLat, startLng);
+                    rect = {
+                        "min": {
+                            "lat": startLat,
+                            "lng": startLng
+                        },
+                        "max": {
+                            "lat": startLat,
+                            "lng": startLng
+                        }
+                    };
+                }
+            );
         }
+
 
         var nights = 0;
         var periodText = "";
@@ -146,6 +159,11 @@
         window.onload = function () {
             scrollPage('#top');
 
+            initMap();
+        }
+
+        // MAP初期化
+        function initMap() {
             ymap = new Y.Map("map");
 
             ymap.drawMap(latlngStart, 17, Y.LayerSetId.NORMAL);
@@ -153,7 +171,6 @@
             ymap.addControl(new Y.LayerSetControl());
             ymap.addControl(new Y.ScaleControl());
             ymap.addControl(new Y.SliderZoomControlVertical());
-            // ymap.addControl(new Y.SearchControl());
 
         }
 
@@ -253,7 +270,7 @@
 
                 oldLatLng = p;
 
-                if (p.lat()<rect.min.lat)
+                if (p.lat() < rect.min.lat)
                     rect.min.lat = p.lat();
                 else if (p.lat() > rect.max.lat)
                     rect.max.lat = p.lat();
@@ -267,7 +284,7 @@
                 if (count + 1 <= data.length) {
                     nextMapAnimation(count + 1, data);
                 } else {
-                    zoomMapRect();  //ズームを全体に設定
+                    zoomMapRect(); //ズームを全体に設定
                     makeSioriAll(data);
                 }
             }, 1000);
