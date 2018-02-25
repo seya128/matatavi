@@ -73,6 +73,13 @@ APIのCSSを上書き
     height: 550px;
 }
 
+.center-box-keyword-image {
+    background-image: url("./img/bg.png");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center top;
+}
+
 .center-box-keyword {
     position: absolute;
     box-sizing: border-box;
@@ -84,7 +91,7 @@ APIのCSSを上書き
     margin: auto;
     text-align: center;
     width: 90%;
-    height: 400px;
+    height: 450px;
 }
 
 /* プランタイトル */
@@ -202,7 +209,7 @@ APIのCSSを上書き
     padding: 3px;
     background-color: rgb(250, 184, 62);
     text-align: center;
-    
+
 }
 .desc_box {
     max-height: 0px;
