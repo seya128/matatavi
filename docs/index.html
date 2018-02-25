@@ -49,14 +49,38 @@
                 <h4>キーワード</h4>
                 <table style="width: 100%">
                     <tr>
-                        <td><a onclick="clickKeyword('グルメ')"><img alt="logo" src="img/gourmet.png"></a></td>
-                        <td><a onclick="clickKeyword('写真')"><img alt="logo" src="img/photo.png"></a></td>
-                        <td><a onclick="clickKeyword('癒し')"><img alt="logo" src="img/healing.png"></a></td>
+                        <td>
+                            <a onclick="clickKeyword('グルメ')">
+                                <img alt="logo" src="img/gourmet.png">
+                            </a>
+                        </td>
+                        <td>
+                            <a onclick="clickKeyword('写真')">
+                                <img alt="logo" src="img/photo.png">
+                            </a>
+                        </td>
+                        <td>
+                            <a onclick="clickKeyword('癒し')">
+                                <img alt="logo" src="img/healing.png">
+                            </a>
+                        </td>
                     </tr>
                     <tr>
-                        <td><a onclick="clickKeyword('聖地')"><img alt="logo" src="img/holy_ground.png"></a></td>
-                        <td><a onclick="clickKeyword('冒険')"><img alt="logo" src="img/adventure.png"></a></td>
-                        <td><a onclick="clickKeyword('季節')"><img alt="logo" src="img/season.png"></a></td>
+                        <td>
+                            <a onclick="clickKeyword('聖地')">
+                                <img alt="logo" src="img/holy_ground.png">
+                            </a>
+                        </td>
+                        <td>
+                            <a onclick="clickKeyword('冒険')">
+                                <img alt="logo" src="img/adventure.png">
+                            </a>
+                        </td>
+                        <td>
+                            <a onclick="clickKeyword('季節')">
+                                <img alt="logo" src="img/season.png">
+                            </a>
+                        </td>
                     </tr>
                 </table>
             </div>
@@ -170,7 +194,7 @@
         //地図アニメーション開始
         function startMapAnimation(data) {
             ymap.addFeature(new Y.Marker(latlngStart));
-            makeSioriPoint(-1,data);
+            makeSioriPoint(-1, data);
             setTimeout(
                 nextMapAnimation(0, data), 1000);
 
@@ -268,13 +292,26 @@
         }
 
         function elemPoint(name, desc, id) {
+            var s_id = "'#s_" + id + "'";
             $('#siori').append(
                 '<div class = "point" > ' +
-                '<h3 class = "name" > ' + name + '</h3>' +
+                '<h3 class = "name" onclick="clickName(' + s_id + ')" > ' + name + '</h3>' +
+                '<section id="s_' + id + '" class="desc_box">' +
                 '<div class = "desc" > ' + desc + ' </div>' +
-                '</div>' +
-                '<div id = "' + id + '">' + id + '</div>'
+                '<div id = "' + id + '">' + id + '</div>' +
+                '</section>' +
+                '</div>'
             );
+        }
+
+        function clickName(id) {
+            console.log($(id).css("max-height"));
+
+            if ($(id).css("max-height") != "0px") {
+                $(id).css("max-height", 0);
+            } else {
+                $(id).css("max-height", 10000);
+            }
         }
 
 

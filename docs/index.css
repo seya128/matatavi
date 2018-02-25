@@ -88,6 +88,7 @@ APIのCSSを上書き
 }
 
 /* プランタイトル */
+
 #plan-title {
     box-sizing: border-box;
     text-align: center;
@@ -98,8 +99,8 @@ APIのCSSを上書き
     padding: 0 0.5em;
 }
 
-
 /* 作成中 */
+
 #now-making {
     position: absolute;
     box-sizing: border-box;
@@ -120,6 +121,7 @@ APIのCSSを上書き
 #now-making p {
     margin: 5px auto;
 }
+
 .loader,
 .loader:before,
 .loader:after {
@@ -185,9 +187,26 @@ APIのCSSを上書き
 }
 
 /* 地図 */
+
 #map {
     transition: all 1s 0s ease;
     opacity: 0;
+}
+
+/* 経路エリア*/
+
+.name {
+    box-sizing: border-box;
+    width: 100%;
+    margin: 5px 0;
+    padding: 3px;
+    background-color: rgb(250, 184, 62);
+    
+}
+.desc_box {
+    max-height: 0px;
+    overflow-y: hidden;
+    transition: all 0.5s 0s;
 }
 
 /* */
