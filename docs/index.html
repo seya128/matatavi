@@ -49,19 +49,19 @@
                 <h4>キーワード</h4>
                 <table style="width: 100%">
                     <tr>
-                        <td><a ><img alt="logo" src="img/gourmet.png"></a></td>
-                        <td><a ><img alt="logo" src="img/photo.png"></a></td>
-                        <td><a ><img alt="logo" src="img/healing.png"></a></td>
+                        <td><a onclick="clickKeyword('グルメ')"><img alt="logo" src="img/gourmet.png"></a></td>
+                        <td><a onclick="clickKeyword('写真')"><img alt="logo" src="img/photo.png"></a></td>
+                        <td><a onclick="clickKeyword('癒し')"><img alt="logo" src="img/healing.png"></a></td>
                     </tr>
                     <tr>
-                        <td><a ><img alt="logo" src="img/holy_ground.png"></a></td>
-                        <td><a ><img alt="logo" src="img/adventure.png"></a></td>
-                        <td><a ><img alt="logo" src="img/season.png"></a></td>
+                        <td><a onclick="clickKeyword('聖地')"><img alt="logo" src="img/holy_ground.png"></a></td>
+                        <td><a onclick="clickKeyword('冒険')"><img alt="logo" src="img/adventure.png"></a></td>
+                        <td><a onclick="clickKeyword('季節')"><img alt="logo" src="img/season.png"></a></td>
                     </tr>
                 </table>
             </div>
         </section>
-        <section class="page" id="keyword">
+        <!-- <section class="page" id="keyword">
             <div class="center-box-keyword">
                 <h4>キーワード</h4>
                 <div class="row">
@@ -83,7 +83,7 @@
                     <label for="key_history">歴史</label>
                 </div>
             </div>
-        </section>
+        </section> -->
         <hr>
 
         <section class="page" id="sioriPage">
@@ -114,6 +114,8 @@
         var latlngStart = new Y.LatLng(startLat, startLng);
 
         var nights = 0;
+        var keywords = "";
+
 
         window.onload = function () {
             scrollPage('#top');
@@ -150,6 +152,12 @@
             scrollPage('#keyword');
         }
 
+        // キーワードクリック
+        function clickKeyword(key) {
+            keywords = key;
+            clickMakeSiori();
+        }
+
         // しおり作成クリック
         function clickMakeSiori() {
             scrollPage('#sioriPage');
@@ -159,10 +167,10 @@
             var vLng = startLng;
             // makeSiori(new Y.LatLng(35.161089, 136.882396));
             $.getJSON("https://www.cotogoto.ai/matatavi/sample", {
-                    lat: vLat,
-                    lng: vLng,
-                    nights: 3,
-                    keywords: "冒険",
+                    "lat": vLat,
+                    "lng": vLng,
+                    "nights": nights,
+                    "keywords": keywords,
                 },
                 function (data, status) {
                     console.log(data);
