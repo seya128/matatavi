@@ -173,4 +173,10 @@ APIのCSSを上書き
     }
 }
 
+/* 地図 */
+#map {
+    transition: all 1s 0s ease;
+    opacity: 0;
+}
+
 /* */

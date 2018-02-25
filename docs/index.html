@@ -19,7 +19,9 @@
     <div class="container">
         <section class="page" id="top">
             <div class="center-box-top">
-                <h1><img alt="logo" src="img/logo.png"></h1>
+                <h1>
+                    <img alt="logo" src="img/logo.png">
+                </h1>
                 <h2>また、旅がしたくなる</h2>
                 <p>matataviは「旅のしおり」</p>
                 <p>自動作成サービスです。</p>
@@ -72,12 +74,13 @@
         <hr>
 
         <section class="page" id="sioriPage">
-            <div id="now-making"><p>作成中</p><p class="loader"></p></div>
+            <div id="now-making">
+                <p>作成中</p>
+                <p class="loader"></p>
+            </div>
 
             <div id="map" style="width:100%; height:300px"></div>
 
-            <hr>
-            <h4>しおり</h4>
             <section id="siori">
             </section>
 
@@ -153,14 +156,18 @@
                     $('#now-making').hide();
 
                     //地図アニメーションスタート
-                    startMapAnimation(data);
+                    $('#map').css('opacity', 1);
+                    setTimeout(
+                        startMapAnimation(data),
+                        1000);
                 }
             );
         }
 
         function startMapAnimation(data) {
             ymap.addFeature(new Y.Marker(latlngStart));
-            nextMapAnimation(0, data);
+            setTimeout(
+                nextMapAnimation(0, data), 1000);
 
         }
 
@@ -180,7 +187,7 @@
                 } else {
                     makeSioriAll(data);
                 }
-            }, 500);
+            }, 1000);
         }
 
         function makeSioriAll(data) {
