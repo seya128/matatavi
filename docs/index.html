@@ -415,7 +415,7 @@
             searchWord += '&searchType=plain';
 
             // 探索を実行
-            obj.search(searchWord, resultApp.PRICE_ONEWAY, function (isSuccess) {
+            obj.search(searchWord, obj.PRICE_ONEWAY, function (isSuccess) {
                 if (!isSuccess) {
                     alert("探索結果が取得できませんでした");
                 }
