@@ -164,13 +164,15 @@
             );
         }
 
+        //地図アニメーション開始
         function startMapAnimation(data) {
             ymap.addFeature(new Y.Marker(latlngStart));
+            makeSioriPoint(-1,data);
             setTimeout(
                 nextMapAnimation(0, data), 1000);
 
         }
-
+        //地図アニメーション次のポイント
         function nextMapAnimation(count, data) {
             console.log("count:" + count);
             setTimeout(function () {
@@ -181,6 +183,7 @@
                     ymap.panTo(p, true);
                 ymap.addFeature(new Y.Label(p, data[count].name1));
                 ymap.addFeature(new Y.Marker(p));
+                makeSioriPoint(count, data);
 
                 if (count + 1 < data.length) {
                     nextMapAnimation(count + 1, data);
@@ -190,12 +193,22 @@
             }, 1000);
         }
 
-        function makeSioriAll(data) {
-            elemPoint("出発", "", "keiro0");
-            for (var i = 0; i < data.length; i++) {
-                elemPoint(data[i].name1, data[i].descs, "keiro" + (i + 1));
+        //しおりポイント表示
+        function makeSioriPoint(count, data) {
+            if (count < 0) {
+                elemPoint("出発", "", "keiro0");
+            } else if (count < data.length) {
+                elemPoint(data[count].name1, data[count].descs, "keiro" + (count + 1));
+            } else if (count == data.length) {
+                elemPoint("到着", "", "goal");
             }
-            elemPoint("到着", "", "goal");
+        }
+
+        function makeSioriAll(data) {
+            // for (var i = 0; i < data.length; i++) {
+            //     elemPoint(data[i].name1, data[i].descs, "keiro" + (i + 1));
+            // }
+            // elemPoint("到着", "", "goal");
 
 
             for (var i = 0; i < data.length; i++) {
@@ -261,44 +274,6 @@
             );
         }
 
-        function makeSiori(latlng) {
-            ymap.addFeature(new Y.Marker(latlng));
-            setTimeout(function () {
-                var p = new Y.LatLng(34.9686991, 137.61252087);
-                ymap.setZoom(9,
-                    true, p, true);
-                setTimeout(function () {
-                    ymap.addFeature(new Y.Label(p, "松風苑"));
-                    ymap.addFeature(new Y.Marker(p));
-                    setTimeout(function () {
-                        var p = new Y.LatLng(35.01470633, 138.9451893);
-                        ymap.panTo(p, true);
-                        setTimeout(function () {
-                            ymap.addFeature(new Y.Label(p,
-                                "大仁温泉"));
-                            ymap.addFeature(new Y.Marker(p));
-                            setTimeout(function () {
-                                var p = new Y.LatLng(35.2047307,
-                                    140.2819368);
-                                ymap.panTo(p,
-                                    true);
-                                setTimeout(function () {
-                                    ymap.addFeature(new Y.Label(
-                                        p,
-                                        "勝浦つるんつるん温泉"
-                                    ));
-                                    ymap.addFeature(new Y.Marker(
-                                        p));
-                                    searchRun(resultApp[0]);
-                                    searchRun(resultApp[1]);
-                                    searchRun(resultApp[2]);
-                                }, 500);
-                            }, 500);
-                        }, 500);
-                    }, 500);
-                }, 500);
-            }, 100);
-        }
 
         var accessKey = "eBBWPyXMYduCN759";
         var resultApp = []; //経路結果表示パーツ
