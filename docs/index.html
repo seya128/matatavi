@@ -134,6 +134,7 @@
                 function (position) {
                     startLat = position.coords.latitude;
                     startLng = position.coords.longitude;
+                    latlngStart = null;
                     latlngStart = new Y.LatLng(startLat, startLng);
                     rect = {
                         "min": {
@@ -164,13 +165,21 @@
 
         // MAP初期化
         function initMap() {
-            ymap = new Y.Map("map");
+            $('#map').html("");
+            ymap = null;
 
-            ymap.drawMap(latlngStart, 17, Y.LayerSetId.NORMAL);
+            $('#siori').html("");
 
-            ymap.addControl(new Y.LayerSetControl());
-            ymap.addControl(new Y.ScaleControl());
-            ymap.addControl(new Y.SliderZoomControlVertical());
+            rect = {
+                "min": {
+                    "lat": startLat,
+                    "lng": startLng
+                },
+                "max": {
+                    "lat": startLat,
+                    "lng": startLng
+                }
+            };
 
         }
 
@@ -206,6 +215,8 @@
 
         // しおり作成クリック
         function clickMakeSiori() {
+            initMap();
+
             $('#plan-title').html(periodText + "、" + keywords + "の旅");
 
             scrollPage('#sioriPage');
@@ -213,7 +224,6 @@
 
             var vLat = startLat;
             var vLng = startLng;
-            // makeSiori(new Y.LatLng(35.161089, 136.882396));
             $.getJSON("https://www.cotogoto.ai/matatavi/sample", {
                     "lat": vLat,
                     "lng": vLng,
@@ -235,6 +245,11 @@
 
         //地図アニメーション開始
         function startMapAnimation(data) {
+            ymap = new Y.Map("map");
+            ymap.drawMap(latlngStart, 9, Y.LayerSetId.NORMAL);
+            ymap.addControl(new Y.LayerSetControl());
+            ymap.addControl(new Y.ScaleControl());
+            ymap.addControl(new Y.SliderZoomControlVertical());
             ymap.addFeature(new Y.Marker(latlngStart));
             oldLatLng = latlngStart;
 
@@ -254,10 +269,7 @@
                     name = data[count].name1;
                 }
 
-                if (count == 0)
-                    ymap.setZoom(9, true, p, true);
-                else
-                    ymap.panTo(p, true);
+                ymap.panTo(p, true);
                 ymap.addFeature(new Y.Label(p, name));
                 ymap.addFeature(new Y.Marker(p));
 
