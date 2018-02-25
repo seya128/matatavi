@@ -87,8 +87,19 @@ APIのCSSを上書き
     height: 400px;
 }
 
-/* 作成中 */
+/* プランタイトル */
+#plan-title {
+    box-sizing: border-box;
+    text-align: center;
+    background-color: orange;
+    color: white;
+    width: 100%;
+    margin: 3px 0 3px 0;
+    padding: 0 0.5em;
+}
 
+
+/* 作成中 */
 #now-making {
     position: absolute;
     box-sizing: border-box;

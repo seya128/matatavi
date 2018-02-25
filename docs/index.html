@@ -36,11 +36,11 @@
             <div class="center-box-period">
                 <h4>日数</h4>
                 <p>日数を選んでください</p>
-                <p class="btn" id="period1" onclick="clickPeriod(0)">日帰り</p>
-                <p class="btn" id="period2" onclick="clickPeriod(1)">1泊2日</p>
-                <p class="btn" id="period3" onclick="clickPeriod(2)">2泊3日</p>
-                <p class="btn" id="period4" onclick="clickPeriod(3)">3泊4日</p>
-                <p class="btn" id="period5" onclick="clickPeriod(4)">4泊5日</p>
+                <p class="btn" id="period1" onclick="clickPeriod(0,'日帰り')">日帰り</p>
+                <p class="btn" id="period2" onclick="clickPeriod(1,'1泊2日')">1泊2日</p>
+                <p class="btn" id="period3" onclick="clickPeriod(2,'2泊3日')">2泊3日</p>
+                <p class="btn" id="period4" onclick="clickPeriod(3,'3泊4日')">3泊4日</p>
+                <p class="btn" id="period5" onclick="clickPeriod(4,'4泊5日')">4泊5日</p>
             </div>
         </section>
         <hr>
@@ -61,29 +61,6 @@
                 </table>
             </div>
         </section>
-        <!-- <section class="page" id="keyword">
-            <div class="center-box-keyword">
-                <h4>キーワード</h4>
-                <div class="row">
-                    <input type="checkbox" name="keyword" value="温泉" id="key_onsen" checked/>
-                    <label for="key_onsen">温泉</label>
-                    <input type="checkbox" name="keyword" value="ホテル" id="key_hotel" />
-                    <label for="key_hotel">ホテル</label>
-                    <input type="checkbox" name="keyword" value="ペンション" id="key_pen" />
-                    <label for="key_pen">ペンション</label>
-                    <input type="checkbox" name="keyword" value="グルメ" id="key_guru" checked/>
-                    <label for="key_gru">グルメ</label>
-                    <input type="checkbox" name="keyword" value="買い物" id="key_shopping" />
-                    <label for="key_shopping">買い物</label>
-                    <input type="checkbox" name="keyword" value="海" id="key_sea" />
-                    <label for="key_sea">海</label>
-                    <input type="checkbox" name="keyword" value="山" id="key_mountain" />
-                    <label for="key_mountain">山</label>
-                    <input type="checkbox" name="keyword" value="歴史" id="key_history" checked/>
-                    <label for="key_history">歴史</label>
-                </div>
-            </div>
-        </section> -->
         <hr>
 
         <section class="page" id="sioriPage">
@@ -92,6 +69,7 @@
                 <p class="loader"></p>
             </div>
 
+            <h2 id="plan-title"></h2>
             <div id="map" style="width:100%; height:300px"></div>
 
             <section id="siori">
@@ -114,6 +92,7 @@
         var latlngStart = new Y.LatLng(startLat, startLng);
 
         var nights = 0;
+        var periodText = "";
         var keywords = "";
 
 
@@ -137,9 +116,10 @@
         }
 
         // 日数クリック
-        function clickPeriod(n) {
+        function clickPeriod(n, text) {
             console.log("click nights = " + n);
             nights = n;
+            periodText = text;
 
             $("#period1").removeClass("btn-checked");
             $("#period2").removeClass("btn-checked");
@@ -160,6 +140,8 @@
 
         // しおり作成クリック
         function clickMakeSiori() {
+            $('#plan-title').html(periodText + "、" + keywords + "の旅");
+
             scrollPage('#sioriPage');
             $('#now-making').show();
 
