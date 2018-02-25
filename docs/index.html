@@ -255,6 +255,7 @@
                 if (count + 1 <= data.length) {
                     nextMapAnimation(count + 1, data);
                 } else {
+                    zoomMapRect();  //ズームを全体に設定
                     makeSioriAll(data);
                 }
             }, 1000);
@@ -269,6 +270,19 @@
             } else if (count == data.length) {
                 elemPoint("GOAL", "", "goal");
             }
+        }
+
+        //マップを全体表示できるズームに
+        function zoomMapRect() {
+            var bnds = new Y.LatLngBounds(
+                new Y.LatLng(rect.min.lat, rect.min.lng),
+                new Y.LatLng(rect.max.lat, rect.max.lng)
+            );
+
+            var zoom = ymap.getBoundsZoomLevel(bnds);
+
+            console.log("zoom = " + zoom);
+            ymap.setZoom(zoom, true, bnds.getCenter(), true);
         }
 
         function makeSioriAll(data) {
