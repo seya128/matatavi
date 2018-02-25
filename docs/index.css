@@ -201,6 +201,7 @@ APIのCSSを上書き
     margin: 5px 0;
     padding: 3px;
     background-color: rgb(250, 184, 62);
+    text-align: center;
     
 }
 .desc_box {
