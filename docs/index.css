@@ -216,8 +216,9 @@ APIのCSSを上書き
     width: 100%;
     margin: 5px 0;
     padding: 3px;
-    background-color: rgb(250, 184, 62);
+    background-color: orange;
     text-align: center;
+    color: white;
 
 }
 .desc_box {
