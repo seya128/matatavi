@@ -306,11 +306,23 @@
         //しおりポイント表示
         function makeSioriPoint(count, data) {
             if (count < 0) {
-                elemPoint("START", "", "keiro0");
+                var d = {
+                    "name1": "START",
+                    "descs": "",
+                    "lat": startLat,
+                    "lng": startLng
+                };
+                elemPoint(d, "keiro0");
             } else if (count < data.length) {
-                elemPoint(data[count].name1, data[count].descs, "keiro" + (count + 1));
+                elemPoint(data[count], "keiro" + (count + 1));
             } else if (count == data.length) {
-                elemPoint("GOAL", "", "goal");
+                var d = {
+                    "name1": "GOAL",
+                    "descs": "",
+                    "lat": startLat,
+                    "lng": startLng
+                };
+                elemPoint(d, "goal");
             }
         }
 
@@ -387,17 +399,28 @@
 
         }
 
-        function elemPoint(name, desc, id) {
+        function elemPoint(data, id) {
             var s_id = "'#s_" + id + "'";
             $('#siori').append(
                 '<div class = "point" > ' +
-                '<h3 class = "name" onclick="clickName(' + s_id + ')" > ' + name + '</h3>' +
+                elemNameBar(s_id, data) +
                 '<section id="s_' + id + '" class="desc_box">' +
-                '<div class = "desc" > ' + desc + ' </div>' +
+                '<div class = "desc" > ' + data.descs + ' </div>' +
                 '<div id = "' + id + '">' + id + '</div>' +
                 '</section>' +
                 '</div>'
             );
+        }
+
+        function elemNameBar(s_id, data) {
+            var s =
+                '<div class="name-bar">' +
+                '<h3 class = "name" onclick="clickName(' + s_id + ')" > ' + data.name1 + '</h3>' +
+                '<a class="map-btn" href="https://maps.google.com/maps?q=' +
+                data.lat + ',' + data.lng + '&z=14" target="_blank">MAP</a>' +
+                '</div>';
+
+            return s;
         }
 
         function clickName(id) {
