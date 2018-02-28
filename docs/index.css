@@ -9,6 +9,9 @@ APIのCSSを上書き
 このアプリケーション用の新しいCSS
 
 */
+body {
+    font-family: sans-serif;
+}
 
 .row {
     box-sizing: border-box;
