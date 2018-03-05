@@ -89,7 +89,7 @@ body {
 }
 
 .center-box-period-image {
-    background-image: url("./img/title-bg.png");
+    background-image: url("https://seya128.github.io/matatavi/img/title-bg.png");
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center top;
@@ -97,7 +97,7 @@ body {
 }
 
 .center-box-keyword-image {
-    background-image: url("./img/bg.png");
+    background-image: url("https://seya128.github.io/matatavi/img/bg.png");
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center top;
@@ -133,7 +133,7 @@ body {
     width: 100%;
     margin: 0;
     padding: 9px;
-    background-image: url("./img/title-bg.png");
+    background-image: url("https://seya128.github.io/matatavi/img/title-bg.png");
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center top;

@@ -52,34 +52,34 @@
                     <tr>
                         <td>
                             <a onclick="clickKeyword('グルメ')">
-                                <img alt="logo" src="img/gourmet_.png">
+                                <img id="gourmet" alt="logo" src="img/gourmet_.png">
                             </a>
                         </td>
                         <td>
                             <a onclick="clickKeyword('写真')">
-                                <img alt="logo" src="img/photo_.png">
+                                <img id="photo" alt="logo" src="img/photo_.png">
                             </a>
                         </td>
                         <td>
                             <a onclick="clickKeyword('癒し')">
-                                <img alt="logo" src="img/healing_.png">
+                                <img id="healing" alt="logo" src="img/healing_.png">
                             </a>
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <a onclick="clickKeyword('聖地')">
-                                <img alt="logo" src="img/holy_ground_.png">
+                                <img id="holy-ground" alt="logo" src="img/holy_ground_.png">
                             </a>
                         </td>
                         <td>
                             <a onclick="clickKeyword('冒険')">
-                                <img alt="logo" src="img/adventure_.png">
+                                <img id="adventure" alt="logo" src="img/adventure_.png">
                             </a>
                         </td>
                         <td>
                             <a onclick="clickKeyword('季節')">
-                                <img alt="logo" src="img/season_.png">
+                                <img id="season" alt="logo" src="img/season_.png">
                             </a>
                         </td>
                     </tr>
@@ -211,6 +211,25 @@
         // キーワードクリック
         function clickKeyword(key) {
             keywords = key;
+            $('#gourmet').attr('src','img/gourmet_.png');
+            $('#photo').attr('src','img/photo_.png');
+            $('#healing').attr('src','img/healing_.png');
+            $('#holy-ground').attr('src','img/holy_ground_.png');
+            $('#adventure').attr('src','img/adventure_.png');
+            $('#season').attr('src','img/season_.png');
+            if ('グルメ' == key) {
+                $('#gourmet').attr('src','img/gourmet.png');
+            } else if ('写真' == key) {
+                $('#photo').attr('src','img/photo.png');
+            } else if ('癒し' == key) {
+                $('#healing').attr('src','img/healing.png');
+            } else if ('聖地' == key) {
+                $('#holy-ground').attr('src','img/holy_ground.png');
+            } else if ('冒険' == key) {
+                $('#adventure').attr('src','img/adventure.png');
+            } else if ('季節' == key) {
+                $('#season').attr('src','img/season.png');
+            }
             clickMakeSiori();
         }
 
