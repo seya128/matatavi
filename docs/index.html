@@ -8,7 +8,7 @@
 
     <link rel="stylesheet" href="css/flexboxgrid/flexboxgrid.min.css">
     <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://rawgit.com/EkispertWebService/GUI/ed686b9d12d/expGuiCourse/expCss/expGuiCourse.css">
+    <link rel="stylesheet" href="https://cdn.rawgit.com/hmaruyama/GUI/add_expGuiCoursePlain/expGuiCoursePlain/expCss/expGuiCoursePlain.css">
 
     <link rel="stylesheet" href="index.css">
 </head>
@@ -108,7 +108,7 @@
     <!-- Compiled and minified JavaScript -->
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
-    <script src="https://rawgit.com/EkispertWebService/GUI/ed686b9d12d/expGuiCourse/expGuiCourse.js"></script>
+    <script src="https://cdn.rawgit.com/hmaruyama/GUI/add_expGuiCoursePlain/expGuiCoursePlain/expGuiCoursePlain.js"></script>
 
     <script type="text/javascript" charset="utf-8" src="https://map.yahooapis.jp/js/V1/jsapi?appid=dj00aiZpPW0zYXBCRWFrMDlZTyZzPWNvbnN1bWVyc2VjcmV0Jng9MmI-"></script>
     <script type="text/javascript">
@@ -385,7 +385,7 @@
                     latlng[0].lng = data[i - 1].lng;
                 }
 
-                resultApp[i] = new expGuiCourse(document.getElementById(id));
+                resultApp[i] = new expGuiCoursePlain(document.getElementById(id));
                 resultApp[i].setConfigure("key", accessKey);
                 resultApp[i].setConfigure("ssl", true);
                 resultApp[i].setConfigure("from", nameFrom);
@@ -408,7 +408,7 @@
                     "lng": startLng
                 }
             ];
-            resultApp[i] = new expGuiCourse(document.getElementById(id));
+            resultApp[i] = new expGuiCoursePlain(document.getElementById(id));
             resultApp[i].setConfigure("key", accessKey);
             resultApp[i].setConfigure("ssl",
                 true);
@@ -453,7 +453,7 @@
         }
 
 
-        var accessKey = "eBBWPyXMYduCN759";
+        var accessKey = "MT9Skn4r7kyq7FpY"; // 駅すぱあとオンラインハッカソン用のアクセスキー
         var resultApp = []; //経路結果表示パーツ
 
         /*
@@ -462,18 +462,18 @@
         function init() {
 
             // 経路表示パーツ初期化
-            resultApp[0] = new expGuiCourse(document.getElementById("result1"));
+            resultApp[0] = new expGuiCoursePlain(document.getElementById("result1"));
             resultApp[0].setConfigure("key", accessKey);
             resultApp[0].setConfigure("ssl", true);
             resultApp[0].setConfigure("from", "スタート地");
             resultApp[0].setConfigure("to", "ポイント１");
-            resultApp[1] = new expGuiCourse(document.getElementById("result2"));
+            resultApp[1] = new expGuiCoursePlain(document.getElementById("result2"));
             resultApp[1].setConfigure("key", accessKey);
             resultApp[1].setConfigure("ssl",
                 true);
             resultApp[1].setConfigure("from", "ポイント１");
             resultApp[1].setConfigure("to", "ポイント２");
-            resultApp[2] = new expGuiCourse(document.getElementById("result3"));
+            resultApp[2] = new expGuiCoursePlain(document.getElementById("result3"));
             resultApp[2].setConfigure("key", accessKey);
             resultApp[2].setConfigure("ssl",
                 true);
@@ -486,16 +486,10 @@
          */
         function searchRun(obj, latlngs) {
             var searchWord = "";
-            // 発着地リストを作成
-            var viaList = "";
-            viaList += latlngs[0].lat + "," + latlngs[0].lng + ",wgs84";
-            viaList += ":";
-            viaList += latlngs[1].lat + "," + latlngs[1].lng + ",wgs84";
 
             // 経路表示パーツ#1の場合
-            searchWord += "viaList=" + viaList;
-            // 探索種別 ※PLAIN固定
-            searchWord += '&searchType=plain';
+            searchWord += "&from=" + latlngs[0].lat + "," + latlngs[0].lng + ",wgs84";
+            searchWord += "&to=" + latlngs[1].lat + "," + latlngs[1].lng + ",wgs84";
 
             // 探索を実行
             obj.search(searchWord, obj.PRICE_ONEWAY, function (isSuccess) {
