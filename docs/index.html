@@ -4,6 +4,8 @@
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
+    <link rel="shortcut icon" href="fabicon.png">
+    <link rel="apple-touch-icon-precomposed" href="webclipicon_matatavi.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link rel="stylesheet" href="css/flexboxgrid/flexboxgrid.min.css">
@@ -245,11 +247,11 @@
             var vLat = startLat;
             var vLng = startLng;
             $.getJSON("https://www.cotogoto.ai/matatavi/sample", {
-                "lat": vLat,
-                "lng": vLng,
-                "nights": nights,
-                "keywords": keywords,
-            },
+                    "lat": vLat,
+                    "lng": vLng,
+                    "nights": nights,
+                    "keywords": keywords,
+                },
                 function (data, status) {
                     console.log(data);
                     $('#now-making').hide();
@@ -372,13 +374,13 @@
                 var id = "keiro" + i;
 
                 var latlng = [{
-                    "lat": startLat,
-                    "lng": startLng
-                },
-                {
-                    "lat": data[i].lat,
-                    "lng": data[i].lng
-                }
+                        "lat": startLat,
+                        "lng": startLng
+                    },
+                    {
+                        "lat": data[i].lat,
+                        "lng": data[i].lng
+                    }
                 ];
                 if (i > 0) {
                     latlng[0].lat = data[i - 1].lat;
@@ -400,13 +402,13 @@
             var nameTo = "到着";
             var id = "keiro" + i;
             var latlng = [{
-                "lat": data[i - 1].lat,
-                "lng": data[i - 1].lng
-            },
-            {
-                "lat": startLat,
-                "lng": startLng
-            }
+                    "lat": data[i - 1].lat,
+                    "lng": data[i - 1].lng
+                },
+                {
+                    "lat": startLat,
+                    "lng": startLng
+                }
             ];
             resultApp[i] = new expGuiCoursePlain(document.getElementById(id));
             resultApp[i].setConfigure("key", accessKey);
