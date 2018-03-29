@@ -435,12 +435,18 @@
         }
 
         function elemNameBar(s_id, data) {
-            var s =
-                '<div class="name-bar">' +
-                '<h3 class = "name" onclick="clickName(' + s_id + ')" > ' + data.name1 + '</h3>' +
-                '<a class="map-btn" href="https://www.google.com/maps/search/' + data.pref + data.city + data.street +
-                '　' + data.name1 + '" target="_blank">MAP</a>' +
-                '</div>';
+            var s = '<div class="name-bar">';
+            console.log(s_id);
+            if (s_id != "'#s_keiro0'" && s_id != "'#s_goal'") {
+                s += '<a class="map-btn" href="https://www.google.co.jp/search?q=' + data.pref + data.city + '+' +
+                    data.name1 + '" target="_blank"><img src="img/icons8-google-50.png"/></a>'
+            }
+            s += '<h3 class = "name" onclick="clickName(' + s_id + ')" > ' + data.name1 + '</h3>';
+            if (s_id != "'#s_keiro0'" && s_id != "'#s_goal'") {
+                s += '<a class="map-btn" href="https://www.google.com/maps/search/' + data.pref + data.city + data.street +
+                    '　' + data.name1 + '" target="_blank"><img src="img/icons8-google-maps-50.png"/></a>';
+            }
+            s += '</div>';
 
             return s;
         }
