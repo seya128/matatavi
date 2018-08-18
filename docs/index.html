@@ -1,513 +1,234 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <title>Matatavi〜また旅に出かけたくなるプラン提案〜</title>
-    <link rel="shortcut icon" href="fabicon.png">
-    <link rel="apple-touch-icon-precomposed" href="webclipicon_matatavi.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <link rel="stylesheet" href="css/flexboxgrid/flexboxgrid.min.css">
-    <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdn.rawgit.com/hmaruyama/GUI/add_expGuiCoursePlain/expGuiCoursePlain/expCss/expGuiCoursePlain.css">
-
-    <link rel="stylesheet" href="index.css">
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <title>Matatavi〜また旅に出かけたくなるプラン提案〜</title>
+  <link rel="shortcut icon" href="fabicon.png">
+  <link rel="apple-touch-icon-precomposed" href="webclipicon_matatavi.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
+  <link rel="stylesheet" href="libs/onsen-css-theme/onsen-css-components.min.css">
+  <link rel="stylesheet" href="libs/onsen-css-theme/theme.css">
+  <link rel="stylesheet" href="libs/icomoon/icomoon.css">
+  <link rel="stylesheet" href="css/timeline.css">
+  <link rel="stylesheet" href="css/index.css">
+  <!-- Compiled and minified JavaScript -->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
+  <script type="text/javascript" src="https://map.yahooapis.jp/js/V1/jsapi?appid=dj00aiZpPW0zYXBCRWFrMDlZTyZzPWNvbnN1bWVyc2VjcmV0Jng9MmI-" charset="utf-8"></script>
+  <script type="text/javascript" src="js/index.js"></script>
 </head>
-
-
 <body>
+  <ons-splitter>
+    <ons-splitter-side id="menu" side="left" width="220px" collapse swipeable>
+      <ons-page>
+        <ons-list>
+          <ons-list-item onclick="fn.load('plan.html')" tappable>
+            旅プラン
+          </ons-list-item>
+          <ons-list-item onclick="fn.load('history.html')" tappable>
+            履歴
+          </ons-list-item>
+        </ons-list>
+      </ons-page>
+    </ons-splitter-side>
+    <ons-splitter-content id="content" page="top.html"></ons-splitter-content>
+  </ons-splitter>
 
-    <div class="container">
-        <section class="page" id="top">
-            <div class="center-box-top">
-                <h1>
-                    <img alt="logo" src="img/logo.png">
-                </h1>
-                <h2>また、旅がしたくなる</h2>
-                <p>matataviは「旅のしおり」</p>
-                <p>自動作成サービスです。</p>
-                <p>旅行における意識決定を</p>
-                <p>手助けいたします。</p>
-                <br>
-                <a class="btn" onclick="scrollPage('#period')">START</a>
+  <template id="top.html">
+    <ons-page class="page">
+      <div class="center-box-top">
+        <h1>
+            <img alt="logo" src="img/logo.png">
+        </h1>
+        <h2>また、旅がしたくなる</h2>
+        <p>matataviは「旅のしおり」</p>
+        <p>自動作成サービスです。</p>
+        <p>旅行における意識決定を</p>
+        <p>手助けいたします。</p>
+        <br>
+        <a class="btn button" onclick="fn.load('plan.html')">START</a>
+      </div>
+    </ons-page>
+  </template>
+
+  <template id="plan.html">
+    <ons-navigator swipeable id="myNavigator" page="period.html"></ons-navigator>
+  </template>
+
+  <template id="history.html">
+    <ons-page>
+      <ons-toolbar>
+        <div class="left">
+          <ons-toolbar-button onclick="fn.open()">
+            <ons-icon icon="md-menu"></ons-icon>
+          </ons-toolbar-button>
+        </div>
+        <div class="center">
+          履歴
+        </div>
+      </ons-toolbar>
+    </ons-page>
+  </template>
+
+  <template id="period.html">
+    <ons-page id="period" class="page">
+      <div class="page__background center-box-period-image"></div>
+      <ons-toolbar>
+        <div class="left">
+          <ons-toolbar-button onclick="fn.open()">
+            <ons-icon icon="md-menu"></ons-icon>
+          </ons-toolbar-button>
+        </div>
+        <div class="center">日数</div>
+      </ons-toolbar>
+
+      <div class="center-box-period">
+          <div style="height: 15%"></div>
+          <h4>日数を選んでください。</h4>
+          <div style="height: 30px;"></div>
+          <ons-button id="push-period-0" class="btn button" style="width: 90%; margin: 0.2em;">日帰り</ons-button>
+          <ons-button id="push-period-1" class="btn button" style="width: 90%; margin: 0.2em;">1泊2日</ons-button>
+          <ons-button id="push-period-2" class="btn button" style="width: 90%; margin: 0.2em;">2泊3日</ons-button>
+          <ons-button id="push-period-3" class="btn button" style="width: 90%; margin: 0.2em;">3泊4日</ons-button>
+          <ons-button id="push-period-4" class="btn button" style="width: 90%; margin: 0.2em;">4泊5日</ons-button>
+      </div>
+    </ons-page>
+  </template>
+
+
+  <template id="keyword.html">
+    <ons-page id="keyword" class="page">
+      <div class="page__background center-box-keyword-image"></div>
+      <ons-toolbar>
+        <div class="left">
+          <ons-back-button>日数</ons-back-button>
+        </div>
+        <div class="center">種類</div>
+      </ons-toolbar>
+
+      <div class="center-box-keyword">
+        <h4>どんな旅にするのか選択してください。</h4>
+        <div style="height: 30%;"></div>
+        <table style="width: 100%">
+          <tr>
+            <td>
+                <!-- すべて -->
+                <ons-button id="push-keyword-all" class="btn2 button" style="height: 65px; width: 92px; padding-top: 18px; font-size: 200%;"><i class="icon-0"></i></ons-button>
+            </td>
+            <td>
+                <!-- グルメ -->
+                <ons-button id="push-keyword-gourmet" class="btn2 button" style="height: 65px; width: 92px;"><i class="icon-1"></i></ons-button>
+            </td>
+            <td>
+                <!-- 写真 -->
+                <ons-button id="push-keyword-photo" class="btn2 button" style="height: 65px; width: 92px;"><i class="icon-2"></i></ons-button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+                <span>すべて</span>
+            </td>
+            <td>
+                <span>グルメ</span>
+            </td>
+            <td>
+                <span>写真</span>
+            </td>
+          </tr>
+          <tr>
+            <td>
+                <!-- 癒し -->
+                <ons-button id="push-keyword-healing" class="btn2 button" style="height: 65px; width: 92px;"><i class="icon-3"></i></ons-button>
+            </td>
+            <td>
+                <!-- 冒険 -->
+                <ons-button id="push-keyword-adventure" class="btn2 button" style="height: 65px; width: 92px;"><i class="icon-4"></i></ons-button>
+            </td>
+            <td>
+                <!-- 季節 -->
+                <ons-button id="push-keyword-season" class="btn2 button" style="height: 65px; width: 92px;"><i class="icon-5"></i></ons-button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+                <span>癒し</span>
+            </td>
+            <td>
+                <span>冒険</span>
+            </td>
+            <td>
+                <span>季節</span>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </ons-page>
+  </template>
+
+  <template id="siori.html">
+    <ons-page id="siori" class="page">
+      <ons-toolbar>
+        <div class="left">
+          <ons-back-button>種類</ons-back-button>
+        </div>
+        <div class="center">旅プラン</div>
+      </ons-toolbar>
+
+      <ons-tabbar id="siori-tab" position="top">
+        <ons-tab page="map.html" label="地図" icon="fa-map" active>
+        </ons-tab>
+        <ons-tab page="list.html" label="しおり" icon="fa-list-ol">
+        </ons-tab>
+      </ons-tabbar>
+    </ons-page>
+  </template>
+
+  <template id="map.html">
+    <ons-page id="map" class="page">
+      <div id="canvas" style="height: 100%;"></div>
+    </ons-page>
+  </template>
+
+  <template id="list.html">
+    <ons-page id="list" class="page">
+      <div style="padding: 1.5em 2.0em;">
+        <div class="main-timeline">
+          <div class="timeline">
+            <div class="timeline-icon"></div>
+            <div class="timeline-content">
+              <span class="date">March 10, 2016</span>
+              <h4 class="title">Web Design</h4>
+              <p class="description">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vitae eleifend ex. Praesent magna justo, bibendum id ante ut, vulputate tincidunt ipsum. Curabitur at rhoncus sem, eu feugiat sapien. Duis in libero cursus, dapibus sem ac, ornare mauris. Cras nunc lectus, porta quis metus vestibulum, pellentesque gravida erat.
+              </p>
             </div>
-        </section>
-        <hr>
-        <section class="page center-box-period-image" id="period">
-            <div class="center-box-period">
-                <h4>日数を選んでください。</h4>
-                <div style="height: 30px;"></div>
-                <p class="btn" id="period1" onclick="clickPeriod(0,'日帰り')">日帰り</p>
-                <p class="btn" id="period2" onclick="clickPeriod(1,'1泊2日')">1泊2日</p>
-                <p class="btn" id="period3" onclick="clickPeriod(2,'2泊3日')">2泊3日</p>
-                <p class="btn" id="period4" onclick="clickPeriod(3,'3泊4日')">3泊4日</p>
-                <p class="btn" id="period5" onclick="clickPeriod(4,'4泊5日')">4泊5日</p>
+          </div>
+
+          <div class="timeline">
+            <div class="timeline-icon"></div>
+            <div class="timeline-content right">
+              <span class="date">March 12, 2016</span>
+              <h4 class="title">Web Development</h4>
+              <p class="description">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vitae eleifend ex. Praesent magna justo, bibendum id ante ut, vulputate tincidunt ipsum. Curabitur at rhoncus sem, eu feugiat sapien. Duis in libero cursus, dapibus sem ac, ornare mauris. Cras nunc lectus, porta quis metus vestibulum, pellentesque gravida erat.
+              </p>
             </div>
-        </section>
-        <hr>
-        <section class="page center-box-keyword-image" id="keyword">
-            <div class="center-box-keyword">
-                <h4>どんな旅にするのか選択してください。</h4>
-                <div style="height: 150px;"></div>
-                <table style="width: 100%">
-                    <tr>
-                        <td>
-                            <a onclick="clickKeyword('すべて')">
-                                <img id="all" alt="logo" src="img/all_.png">
-                            </a>
-                        </td>
-                        <td>
-                            <a onclick="clickKeyword('グルメ')">
-                                <img id="gourmet" alt="logo" src="img/gourmet_.png">
-                            </a>
-                        </td>
-                        <td>
-                            <a onclick="clickKeyword('写真')">
-                                <img id="photo" alt="logo" src="img/photo_.png">
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <a onclick="clickKeyword('癒し')">
-                                <img id="healing" alt="logo" src="img/healing_.png">
-                            </a>
-                        </td>
-                        <td>
-                            <a onclick="clickKeyword('冒険')">
-                                <img id="adventure" alt="logo" src="img/adventure_.png">
-                            </a>
-                        </td>
-                        <td>
-                            <a onclick="clickKeyword('季節')">
-                                <img id="season" alt="logo" src="img/season_.png">
-                            </a>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </section>
-        <hr>
+          </div>
 
-        <section class="page" id="sioriPage">
-            <div id="now-making">
-                <p>作成中</p>
-                <p class="loader"></p>
-            </div>
+        </div>
+        <div style="height: 5em;"></div>
+      </div>
+    </ons-page>
+  </template>
 
-            <h2 id="plan-title"></h2>
-            <div style="height: 10px;"></div>
-            <div id="map" style="width:100%; height:300px"></div>
-
-            <section id="siori">
-            </section>
-
-        </section>
-
+  <ons-modal direction="up">
+    <div style="text-align: center">
+      <p>
+        <ons-icon icon="md-spinner" size="28px" spin></ons-icon> Loading...
+      </p>
     </div>
-
-    <!-- Compiled and minified JavaScript -->
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
-    <script src="https://cdn.rawgit.com/hmaruyama/GUI/add_expGuiCoursePlain/expGuiCoursePlain/expGuiCoursePlain.js"></script>
-
-    <script type="text/javascript" charset="utf-8" src="https://map.yahooapis.jp/js/V1/jsapi?appid=dj00aiZpPW0zYXBCRWFrMDlZTyZzPWNvbnN1bWVyc2VjcmV0Jng9MmI-"></script>
-    <script type="text/javascript">
-        var ymap = null;
-        var startLat = 35.161089;
-        var startLng = 136.882396;
-        var latlngStart = new Y.LatLng(startLat, startLng);
-        var oldLatLng = {};
-        var rect = {
-            "min": {
-                "lat": startLat,
-                "lng": startLng
-            },
-            "max": {
-                "lat": startLat,
-                "lng": startLng
-            }
-        };
-
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(
-                // 取得成功した場合
-                function (position) {
-                    startLat = position.coords.latitude;
-                    startLng = position.coords.longitude;
-                    latlngStart = null;
-                    latlngStart = new Y.LatLng(startLat, startLng);
-                    rect = {
-                        "min": {
-                            "lat": startLat,
-                            "lng": startLng
-                        },
-                        "max": {
-                            "lat": startLat,
-                            "lng": startLng
-                        }
-                    };
-                }
-            );
-        }
-
-
-        var nights = 0;
-        var periodText = "";
-        var keywords = "";
-
-
-
-        window.onload = function () {
-            scrollPage('#top');
-
-            initMap();
-        }
-
-        // MAP初期化
-        function initMap() {
-            $('#map').html("");
-            $('#map').css('opacity', 0);
-            ymap = null;
-
-            $('#siori').html("");
-
-            rect = {
-                "min": {
-                    "lat": startLat,
-                    "lng": startLng
-                },
-                "max": {
-                    "lat": startLat,
-                    "lng": startLng
-                }
-            };
-
-        }
-
-        // selector位置までスクロール
-        function scrollPage(selector) {
-            $("html,body").animate({
-                scrollTop: $(selector).offset().top
-            });
-        }
-
-        // 日数クリック
-        function clickPeriod(n, text) {
-            console.log("click nights = " + n);
-            nights = n;
-            periodText = text;
-
-            $("#period1").removeClass("btn-checked");
-            $("#period2").removeClass("btn-checked");
-            $("#period3").removeClass("btn-checked");
-            $("#period4").removeClass("btn-checked");
-            $("#period5").removeClass("btn-checked");
-
-            $("#period" + (n + 1)).addClass("btn-checked");
-
-            scrollPage('#keyword');
-        }
-
-        // キーワードクリック
-        function clickKeyword(key) {
-            keywords = key;
-            $('#all').attr('src', 'img/all_.png');
-            $('#gourmet').attr('src', 'img/gourmet_.png');
-            $('#photo').attr('src', 'img/photo_.png');
-            $('#healing').attr('src', 'img/healing_.png');
-            $('#adventure').attr('src', 'img/adventure_.png');
-            $('#season').attr('src', 'img/season_.png');
-            if ('すべて' == key) {
-                $('#all').attr('src', 'img/all.png');
-            } else if ('グルメ' == key) {
-                $('#gourmet').attr('src', 'img/gourmet.png');
-            } else if ('写真' == key) {
-                $('#photo').attr('src', 'img/photo.png');
-            } else if ('癒し' == key) {
-                $('#healing').attr('src', 'img/healing.png');
-            } else if ('冒険' == key) {
-                $('#adventure').attr('src', 'img/adventure.png');
-            } else if ('季節' == key) {
-                $('#season').attr('src', 'img/season.png');
-            }
-            clickMakeSiori();
-        }
-
-        // しおり作成クリック
-        function clickMakeSiori() {
-            initMap();
-
-            $('#plan-title').html(periodText + "、" + keywords + "の旅");
-
-            scrollPage('#sioriPage');
-            $('#now-making').show();
-
-            var vLat = startLat;
-            var vLng = startLng;
-            $.getJSON("https://www.livlog.xyz/matatavi/getTourspot", {
-                    "lat": vLat,
-                    "lng": vLng,
-                    "nights": nights,
-                    "keywords": keywords,
-                },
-                function (data, status) {
-                    console.log(data);
-                    $('#now-making').hide();
-
-                    //地図アニメーションスタート
-                    $('#map').css('opacity', 1);
-                    setTimeout(
-                        startMapAnimation(data.points),
-                        1000);
-                }
-            );
-        }
-
-        //地図アニメーション開始
-        function startMapAnimation(data) {
-            ymap = new Y.Map("map");
-            ymap.drawMap(latlngStart, 9, Y.LayerSetId.NORMAL);
-            ymap.addControl(new Y.LayerSetControl());
-            ymap.addControl(new Y.ScaleControl());
-            ymap.addControl(new Y.SliderZoomControlVertical());
-            ymap.addFeature(new Y.Marker(latlngStart));
-            oldLatLng = latlngStart;
-
-            makeSioriPoint(-1, data);
-            setTimeout(
-                nextMapAnimation(0, data), 1000);
-
-        }
-        //地図アニメーション次のポイント
-        function nextMapAnimation(count, data) {
-            console.log("count:" + count);
-            setTimeout(function () {
-                var p = latlngStart;
-                var name = "GOAL"
-                if (count < data.length) {
-                    p = new Y.LatLng(data[count].lat, data[count].lng);
-                    name = data[count].name1;
-                }
-
-                ymap.panTo(p, true);
-                ymap.addFeature(new Y.Label(p, name));
-                ymap.addFeature(new Y.Marker(p));
-
-                var style = new Y.Style("ffa500", 8, 0.5);
-                var latlngs = [oldLatLng, p];
-                var polyline = new Y.Polyline(latlngs, {
-                    strokeStyle: style
-                });
-                ymap.addFeature(polyline);
-
-                oldLatLng = p;
-
-                if (p.lat() < rect.min.lat)
-                    rect.min.lat = p.lat();
-                else if (p.lat() > rect.max.lat)
-                    rect.max.lat = p.lat();
-                if (p.lng() < rect.min.lng)
-                    rect.min.lng = p.lng();
-                else if (p.lng() > rect.max.lng)
-                    rect.max.lng = p.lng();
-
-                makeSioriPoint(count, data);
-
-                if (count + 1 <= data.length) {
-                    nextMapAnimation(count + 1, data);
-                } else {
-                    zoomMapRect(); //ズームを全体に設定
-                    makeSioriAll(data);
-                }
-            }, 1000);
-        }
-
-        //しおりポイント表示
-        function makeSioriPoint(count, data) {
-            if (count < 0) {
-                var d = {
-                    "name1": "START",
-                    "descs": "",
-                    "lat": startLat,
-                    "lng": startLng
-                };
-                elemPoint(d, "keiro0");
-            } else if (count < data.length) {
-                elemPoint(data[count], "keiro" + (count + 1));
-            } else if (count == data.length) {
-                var d = {
-                    "name1": "GOAL",
-                    "descs": "",
-                    "lat": startLat,
-                    "lng": startLng
-                };
-                elemPoint(d, "goal");
-            }
-        }
-
-        //マップを全体表示できるズームに
-        function zoomMapRect() {
-            var bnds = new Y.LatLngBounds(
-                new Y.LatLng(rect.min.lat, rect.min.lng),
-                new Y.LatLng(rect.max.lat, rect.max.lng)
-            );
-
-            var zoom = ymap.getBoundsZoomLevel(bnds);
-
-            console.log("zoom = " + zoom);
-            ymap.setZoom(zoom, true, bnds.getCenter(), true);
-        }
-
-        function makeSioriAll(data) {
-            // for (var i = 0; i < data.length; i++) {
-            //     elemPoint(data[i].name1, data[i].descs, "keiro" + (i + 1));
-            // }
-            // elemPoint("到着", "", "goal");
-
-
-            for (var i = 0; i < data.length; i++) {
-                var nameFrom = "出発";
-                if (i > 0) nameFrom = data[i - 1].name1;
-                var nameTo = data[i].name1;
-                var id = "keiro" + i;
-
-                var latlng = [{
-                        "lat": startLat,
-                        "lng": startLng
-                    },
-                    {
-                        "lat": data[i].lat,
-                        "lng": data[i].lng
-                    }
-                ];
-                if (i > 0) {
-                    latlng[0].lat = data[i - 1].lat;
-                    latlng[0].lng = data[i - 1].lng;
-                }
-
-                resultApp[i] = new expGuiCoursePlain(document.getElementById(id));
-                resultApp[i].setConfigure("key", accessKey);
-                resultApp[i].setConfigure("ssl", true);
-                resultApp[i].setConfigure("from", nameFrom);
-                resultApp[i].setConfigure("to", nameTo);
-
-                searchRun(resultApp[i], latlng);
-
-            }
-
-            var i = data.length;
-            var nameFrom = data[i - 1].name1;
-            var nameTo = "到着";
-            var id = "keiro" + i;
-            var latlng = [{
-                    "lat": data[i - 1].lat,
-                    "lng": data[i - 1].lng
-                },
-                {
-                    "lat": startLat,
-                    "lng": startLng
-                }
-            ];
-            resultApp[i] = new expGuiCoursePlain(document.getElementById(id));
-            resultApp[i].setConfigure("key", accessKey);
-            resultApp[i].setConfigure("ssl",
-                true);
-            resultApp[i].setConfigure("from", nameFrom);
-            resultApp[i].setConfigure("to", nameTo);
-            searchRun(resultApp[i], latlng);
-
-        }
-
-        function elemPoint(data, id) {
-            var s_id = "'#s_" + id + "'";
-            $('#siori').append(
-                '<div class = "point" > ' +
-                elemNameBar(s_id, data) +
-                '<section id="s_' + id + '" class="desc_box">' +
-                '<div class = "desc" > ' + data.descs + ' </div>' +
-                '<div id = "' + id + '">' + id + '</div>' +
-                '</section>' +
-                '</div>'
-            );
-        }
-
-        function elemNameBar(s_id, data) {
-            var s = '<div class="name-bar">';
-            console.log(s_id);
-            if (s_id != "'#s_keiro0'" && s_id != "'#s_goal'") {
-                s += '<a class="map-btn" href="https://www.google.co.jp/search?q=' + data.pref + data.city + '+' +
-                    data.name1 + '" target="_blank"><img src="img/icons8-google-50.png"/></a>'
-            }
-            s += '<h3 class = "name" onclick="clickName(' + s_id + ')" > ' + data.name1 + '</h3>';
-            if (s_id != "'#s_keiro0'" && s_id != "'#s_goal'") {
-                s += '<a class="map-btn" href="https://www.google.com/maps/search/' + data.pref + data.city + data.street +
-                    '　' + data.name1 + '" target="_blank"><img src="img/icons8-google-maps-50.png"/></a>';
-            }
-            s += '</div>';
-
-            return s;
-        }
-
-        function clickName(id) {
-            console.log($(id).css("max-height"));
-
-            if ($(id).css("max-height") != "0px") {
-                $(id).css("max-height", 0);
-            } else {
-                $(id).css("max-height", 10000);
-            }
-        }
-
-
-        var accessKey = "7hbqVQNAjunhQYFH"; // 駅すぱあとオンラインハッカソン用のアクセスキー
-        var resultApp = []; //経路結果表示パーツ
-
-        /*
-         * パーツを初期化
-         */
-        function init() {
-
-            // 経路表示パーツ初期化
-            resultApp[0] = new expGuiCoursePlain(document.getElementById("result1"));
-            resultApp[0].setConfigure("key", accessKey);
-            resultApp[0].setConfigure("ssl", true);
-            resultApp[0].setConfigure("from", "スタート地");
-            resultApp[0].setConfigure("to", "ポイント１");
-            resultApp[1] = new expGuiCoursePlain(document.getElementById("result2"));
-            resultApp[1].setConfigure("key", accessKey);
-            resultApp[1].setConfigure("ssl",
-                true);
-            resultApp[1].setConfigure("from", "ポイント１");
-            resultApp[1].setConfigure("to", "ポイント２");
-            resultApp[2] = new expGuiCoursePlain(document.getElementById("result3"));
-            resultApp[2].setConfigure("key", accessKey);
-            resultApp[2].setConfigure("ssl",
-                true);
-            resultApp[2].setConfigure("from", "ポイント２");
-            resultApp[2].setConfigure("to", "ゴール");
-        }
-
-        /*
-         * 探索ボタンの動作
-         */
-        function searchRun(obj, latlngs) {
-            var searchWord = "";
-
-            // 経路表示パーツ#1の場合
-            searchWord += "&from=" + latlngs[0].lat + "," + latlngs[0].lng + ",wgs84";
-            searchWord += "&to=" + latlngs[1].lat + "," + latlngs[1].lng + ",wgs84";
-
-            // 探索を実行
-            obj.search(searchWord, obj.PRICE_ONEWAY, function (isSuccess) {
-                if (!isSuccess) {
-                    alert("探索結果が取得できませんでした");
-                }
-            });
-        }
-    </script>
+  </ons-modal>
 </body>
-
 </html>

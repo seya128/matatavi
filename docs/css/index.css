@@ -1,0 +1,158 @@
+/*
+
+APIのCSSを上書き
+
+*/
+
+/*
+
+このアプリケーション用の新しいCSS
+
+*/
+body {
+    font-family: 'Avenir',
+    'Helvetica Neue',
+    'Helvetica',
+    'Arial',
+    'Hiragino Sans',
+    'ヒラギノ角ゴシック',
+    YuGothic,
+    'Yu Gothic',
+    'メイリオ',
+    Meiryo,
+    'ＭＳ Ｐゴシック',
+    'MS PGothic',
+    sans-serif;
+}
+
+.row {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+.page {
+    position: relative;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100vh;
+}
+
+.btn {
+    font-size: 120%;
+    padding: 0.7em 1.4em;
+    box-sizing: border-box;
+    font-weight: bold;
+}
+
+.btn2 {
+    font-size: 250%;
+    padding-top: 14px;
+    box-sizing: border-box;
+    font-weight: bold;
+    vertical-align:middle;
+}
+
+.center-box-top {
+    position: absolute;
+    box-sizing: border-box;
+    padding: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+    text-align: center;
+    width: 90%;
+    height: 450px;
+}
+
+.center-box-period {
+    position: absolute;
+    box-sizing: border-box;
+    padding: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+    text-align: center;
+    width: 90%;
+    height: 650px;
+}
+
+.center-box-period-image {
+    background-image: url("../img/bg.png");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center top;
+    background-size:contain;
+}
+
+.center-box-keyword-image {
+    background-image: url("../img/bg.png");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center top;
+    background-size:contain;
+}
+
+.center-box-keyword {
+    position: absolute;
+    box-sizing: border-box;
+    padding: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+    text-align: center;
+    width: 90%;
+    height: 450px;
+}
+
+/* プランタイトル */
+
+#plan-title {
+    text-align: center;
+    width: 100%;
+    margin: 0;
+    padding: 9px;
+    background-image: url("https://matatavi.net/img/title-bg.png");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center top;
+    background-size:contain;
+}
+
+.search-button {
+    background-color: #6379F3;
+}
+
+.search-button:active {
+    background-color: #6379F3;
+    transition: none;
+    opacity: 0.2;
+}
+
+.map-button {
+    background-color: #3AAA54;
+}
+
+.map-button:active {
+    background-color: #3AAA54;
+    transition: none;
+    opacity: 0.2;
+}
+
+.eki-button {
+    background-color: #C7000E;
+}
+
+.eki-button:active {
+    background-color: #C7000E;
+    transition: none;
+    opacity: 0.2;
+}
