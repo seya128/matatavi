@@ -69,9 +69,9 @@ document.addEventListener('init', function(event) {
   } else if (page.id === 'siori') {
     var modal = document.querySelector('ons-modal');
     modal.show();
-    page.querySelector('ons-toolbar .center').innerHTML = param.periodText
-        + "、" + param.keyword + "の旅";
     clickMakeSiori();
+  } else if (page.id === 'history') {
+    clickMakeHistory();
   }
 });
 
@@ -81,12 +81,100 @@ document.addEventListener('show', function(event) {
   if (page.id === 'period') {
   } else if (page.id === 'keyword') {
   } else if (page.id === 'siori') {
+    page.querySelector('ons-toolbar .center').innerHTML = param.periodText
+    + "、" + param.keyword + "の旅";
+    var toolbarHeight = $('ons-toolbar').height();
+    var tabHeight = $('ons-tab').height();
+    var sioriHeight = $('#siori').height();
+    $('#canvas').height(sioriHeight - tabHeight - toolbarHeight);
+  } else if (page.id === 'siori2') {
+    page.querySelector('ons-toolbar .center').innerHTML = param.periodText
+    + "、" + param.keyword + "の旅";
     var toolbarHeight = $('ons-toolbar').height();
     var tabHeight = $('ons-tab').height();
     var sioriHeight = $('#siori').height();
     $('#canvas').height(sioriHeight - tabHeight - toolbarHeight);
   }
 });
+
+//履歴作成クリック
+function clickMakeHistory() {
+
+  var modal = document.querySelector('ons-modal');
+  modal.show();
+
+  var uid = localStorage.getItem('uid');
+  $.getJSON("https://www.livlog.xyz/matatavi/getHistory", {
+    "uid" : uid,
+  }, function(data, status) {
+
+    var historyList = $('#historyList');
+    historyList.empty();
+
+    for (var i = 0; i < data.history.length; i++) {
+      var history = data.history[i]
+      var periodName = getPeriodName(history.period);
+
+      var html = '';
+      html += '<ons-list-item modifier="chevron" tappable onclick="clickReMakeSiori('
+        + "'" + history.planId + "','" + history.period + "','" + history.keyword + "'" + ');">';
+      html += '<div class="left" style="width: 40px;" align="center">';
+      if ('すべて' == history.keyword) {
+        html += '<i class="icon-0"></i>';
+      } else if ('グルメ' == history.keyword) {
+        html += '<i class="icon-1"></i>';
+      } else if ('写真' == history.keyword) {
+        html += '<i class="icon-2"></i>';
+      } else if ('癒し' == history.keyword) {
+        html += '<i class="icon-3"></i>';
+      } else if ('冒険' == history.keyword) {
+        html += '<i class="icon-4"></i>';
+      } else if ('季節' == history.keyword) {
+        html += '<i class="icon-5"></i>';
+      }
+      html += '</div>';
+      html += '<div class="center">';
+      html += '<span class="list-item__title">' + periodName + '、' + history.keyword +'の旅</span>';
+      html += '<span class="list-item__subtitle">' + history.createDate + '</span>';
+      html += '</div>';
+      html += '</ons-list-item>';
+      historyList.append(html);
+    }
+
+    var modal = document.querySelector('ons-modal');
+    modal.hide();
+  });
+}
+
+//しおり再作成クリック
+function clickReMakeSiori(planId, period, keyword) {
+
+  fn.load('siori2.html');
+  var modal = document.querySelector('ons-modal');
+  modal.show();
+
+  param.period = period;
+  param.periodText = getPeriodName(period);
+  param.keyword = keyword;
+
+  initMap();
+
+  var uid = localStorage.getItem('uid');
+  var vLat = startLat;
+  var vLng = startLng;
+  $.getJSON("https://www.livlog.xyz/matatavi/getPlan", {
+    "planId" : planId,
+    "uid" : uid,
+  }, function(data, status) {
+    console.log(data);
+    var modal = document.querySelector('ons-modal');
+    modal.hide();
+
+    // 地図アニメーションスタート
+    $('#canvas').css('opacity', 1);
+    setTimeout(startMapAnimation(data.points), 1000);
+  });
+}
 
 //document.addEventListener('prechange', function(event) {
 //  var tab = event.index;
@@ -426,6 +514,26 @@ function clickMakeEkispertUrl(lat1, lng1, lat2, lng2, my) {
   } else {
     alert('ルートが見つかりませんでした。');
   }
+}
+
+// 宿泊日数を文字に置き換える
+function getPeriodName(period) {
+
+  var periodName = '';
+
+  if (period == 0) {
+    periodName = '日帰り';
+  } else if (period == 1) {
+    periodName = '1泊2日';
+  } else if (period == 2) {
+    periodName = '2泊3日';
+  } else if (period == 3) {
+    periodName = '3泊4日';
+  } else if (period == 4) {
+    periodName = '4泊5日';
+  }
+
+  return periodName;
 }
 
 /**

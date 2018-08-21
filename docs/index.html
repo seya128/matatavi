@@ -58,7 +58,7 @@
   </template>
 
   <template id="history.html">
-    <ons-page>
+    <ons-page id="history">
       <ons-toolbar>
         <div class="left">
           <ons-toolbar-button onclick="fn.open()">
@@ -69,6 +69,9 @@
           履歴
         </div>
       </ons-toolbar>
+      <ons-list id="historyList">
+
+      </ons-list>
     </ons-page>
   </template>
 
@@ -172,6 +175,26 @@
       <ons-toolbar>
         <div class="left">
           <ons-back-button>種類</ons-back-button>
+        </div>
+        <div class="center">旅プラン</div>
+      </ons-toolbar>
+
+      <ons-tabbar id="siori-tab" position="top">
+        <ons-tab page="map.html" label="地図" icon="fa-map" active>
+        </ons-tab>
+        <ons-tab page="list.html" label="しおり" icon="fa-list-ol">
+        </ons-tab>
+      </ons-tabbar>
+    </ons-page>
+  </template>
+
+  <template id="siori2.html">
+    <ons-page id="siori2" class="page">
+      <ons-toolbar>
+        <div class="left">
+          <ons-toolbar-button onclick="fn.open()">
+            <ons-icon icon="md-menu"></ons-icon>
+          </ons-toolbar-button>
         </div>
         <div class="center">旅プラン</div>
       </ons-toolbar>
