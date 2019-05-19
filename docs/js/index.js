@@ -104,7 +104,7 @@ function clickMakeHistory() {
   modal.show();
 
   var uid = localStorage.getItem('uid');
-  $.getJSON("https://www.livlog.xyz/matatavi/getHistory", {
+  $.getJSON("https://www.livlog.xyz/webapi/getHistory", {
     "uid" : uid,
   }, function(data, status) {
 
@@ -162,7 +162,7 @@ function clickReMakeSiori(planId, period, keyword) {
   var uid = localStorage.getItem('uid');
   var vLat = startLat;
   var vLng = startLng;
-  $.getJSON("https://www.livlog.xyz/matatavi/getPlan", {
+  $.getJSON("https://www.livlog.xyz/webapi/getPlan", {
     "planId" : planId,
     "uid" : uid,
   }, function(data, status) {
@@ -262,7 +262,7 @@ function clickMakeSiori() {
   var uid = localStorage.getItem('uid');
   var vLat = startLat;
   var vLng = startLng;
-  $.getJSON("https://www.livlog.xyz/matatavi/getTourspot", {
+  $.getJSON("https://www.livlog.xyz/webapi/getTourspot", {
     "lat" : vLat,
     "lng" : vLng,
     "nights" : param.period,
@@ -499,7 +499,7 @@ function clickMakeEkispertUrl(lat1, lng1, lat2, lng2, my) {
       'to' : lat2 + ',' + lng2,
   }
   var json = $.ajax({
-    url: 'https://www.livlog.xyz/matatavi/getEkispertUrl',
+    url: 'https://www.livlog.xyz/webapi/getEkispertUrl',
     type: 'GET',
     data: formdata,
     dataType: 'json',
