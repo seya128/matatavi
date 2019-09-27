@@ -4,9 +4,20 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <title>Matatavi〜また旅に出かけたくなるプラン提案〜</title>
+  <link rel="manifest" href="manifest.json">
   <link rel="shortcut icon" href="fabicon.png">
   <link rel="apple-touch-icon-precomposed" href="webclipicon_matatavi.png" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: content: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+  <meta name="description" content="matataviは「旅のしおり」自動作成サービスです。旅行における意識決定を手助けいたします。">
+  <meta data-n-head="true" data-hid="description" name="description" content="matataviは「旅のしおり」自動作成サービスです。旅行における意識決定を手助けいたします。">
+  <meta data-n-head="true" data-hid="og:site_name" property="og:site_name" content="Matatavi">
+  <meta data-n-head="true" data-hid="og:url" property="og:url" content="https://matatavi.net/">
+  <meta data-n-head="true" data-hid="og:title" property="og:title" content="Matatavi〜また旅に出かけたくなるプラン提案〜">
+  <meta data-n-head="true" data-hid="og:description" property="og:description" content="matataviは「旅のしおり」自動作成サービスです。旅行における意識決定を手助けいたします。">
+  <meta data-n-head="true" data-hid="og:type" property="og:type" content="article">
+  <script src="components/loader.js"></script>
+  <link rel="stylesheet" href="components/loader.css">
   <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
   <link rel="stylesheet" href="libs/onsen-css-theme/onsen-css-components.min.css">
   <link rel="stylesheet" href="libs/onsen-css-theme/theme.css">
@@ -30,6 +41,9 @@
           <ons-list-item onclick="fn.load('history.html')" tappable>
             履歴
           </ons-list-item>
+          <ons-list-item onclick="fn.load('howToUse.html')" tappable>
+            使い方
+          </ons-list-item>
         </ons-list>
       </ons-page>
     </ons-splitter-side>
@@ -40,10 +54,10 @@
     <ons-page class="page">
       <div class="center-box-top">
         <h1>
-            <img alt="logo" src="img/logo.png">
+          <img alt="logo" src="images/logo.png">
         </h1>
         <h2>また、旅がしたくなる</h2>
-        <p>matataviは「旅のしおり」</p>
+        <p>Matataviは「旅のしおり」</p>
         <p>自動作成サービスです。</p>
         <p>旅行における意識決定を</p>
         <p>手助けいたします。</p>
@@ -75,6 +89,37 @@
     </ons-page>
   </template>
 
+    <template id="howToUse.html">
+    <ons-page id="howToUse">
+      <ons-toolbar>
+        <div class="left">
+          <ons-toolbar-button onclick="fn.open()">
+            <ons-icon icon="md-menu"></ons-icon>
+          </ons-toolbar-button>
+        </div>
+        <div class="center">
+          使い方
+        </div>
+      </ons-toolbar>
+      <div class="center-box-how-to">
+        <h1>
+          <img alt="logo" src="images/logo.png">
+        </h1>
+        <h2>また、旅がしたくなる</h2>
+        <p>Matataviは「旅のしおり」</p>
+        <p>自動作成サービスです。</p>
+        <p>旅行における意識決定を</p>
+        <p>手助けいたします。</p>
+        <br>
+        <p>日数と目的の２クリック</p>
+        <p>を選択するだけで、</p>
+        <p>あっという間に旅のプランを</p>
+        <p>提示してくれます。</p>
+        <br>
+      </div>
+    </ons-page>
+  </template>
+
   <template id="period.html">
     <ons-page id="period" class="page">
       <div class="page__background center-box-period-image"></div>
@@ -91,6 +136,7 @@
           <div style="height: 15%"></div>
           <h4>日数を選んでください。</h4>
           <div style="height: 30px;"></div>
+          <ons-button id="push-period-9" class="btn button" style="width: 90%; margin: 0.2em;">散歩</ons-button>
           <ons-button id="push-period-0" class="btn button" style="width: 90%; margin: 0.2em;">日帰り</ons-button>
           <ons-button id="push-period-1" class="btn button" style="width: 90%; margin: 0.2em;">1泊2日</ons-button>
           <ons-button id="push-period-2" class="btn button" style="width: 90%; margin: 0.2em;">2泊3日</ons-button>
@@ -100,7 +146,6 @@
     </ons-page>
   </template>
 
-
   <template id="keyword.html">
     <ons-page id="keyword" class="page">
       <div class="page__background center-box-keyword-image"></div>
@@ -108,7 +153,7 @@
         <div class="left">
           <ons-back-button>日数</ons-back-button>
         </div>
-        <div class="center">種類</div>
+        <div class="center">目的</div>
       </ons-toolbar>
 
       <div class="center-box-keyword">
@@ -174,7 +219,7 @@
     <ons-page id="siori" class="page">
       <ons-toolbar>
         <div class="left">
-          <ons-back-button>種類</ons-back-button>
+          <ons-back-button>目的</ons-back-button>
         </div>
         <div class="center">旅プラン</div>
       </ons-toolbar>
@@ -221,25 +266,12 @@
           <div class="timeline">
             <div class="timeline-icon"></div>
             <div class="timeline-content">
-              <span class="date">March 10, 2016</span>
-              <h4 class="title">Web Design</h4>
+              <h4 class="title">見つかりません。</h4>
               <p class="description">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vitae eleifend ex. Praesent magna justo, bibendum id ante ut, vulputate tincidunt ipsum. Curabitur at rhoncus sem, eu feugiat sapien. Duis in libero cursus, dapibus sem ac, ornare mauris. Cras nunc lectus, porta quis metus vestibulum, pellentesque gravida erat.
+                  もう一度、プランを選択してください。
               </p>
             </div>
           </div>
-
-          <div class="timeline">
-            <div class="timeline-icon"></div>
-            <div class="timeline-content right">
-              <span class="date">March 12, 2016</span>
-              <h4 class="title">Web Development</h4>
-              <p class="description">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vitae eleifend ex. Praesent magna justo, bibendum id ante ut, vulputate tincidunt ipsum. Curabitur at rhoncus sem, eu feugiat sapien. Duis in libero cursus, dapibus sem ac, ornare mauris. Cras nunc lectus, porta quis metus vestibulum, pellentesque gravida erat.
-              </p>
-            </div>
-          </div>
-
         </div>
         <div style="height: 5em;"></div>
       </div>

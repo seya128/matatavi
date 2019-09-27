@@ -1,3 +1,12 @@
+var domain = 'https://www.livlog.xyz/webapi/';
+//var domain = 'http://localhost:8080/livlog-api/';
+var urls = {
+  getHistory: domain + 'getHistory',
+  getPlan: domain + 'getPlan',
+  getTourspot: domain + 'getTourspot',
+  getEkispertUrl: domain + 'getEkispertUrl'
+}
+
 var param = {};
 window.fn = {};
 
@@ -39,6 +48,11 @@ document.addEventListener('init', function(event) {
     page.querySelector('#push-period-4').onclick = function() {
       param.period = 4;
       param.periodText = '4泊5日';
+      document.querySelector('#myNavigator').pushPage('keyword.html');
+    };
+    page.querySelector('#push-period-9').onclick = function() {
+      param.period = 9;
+      param.periodText = '散歩';
       document.querySelector('#myNavigator').pushPage('keyword.html');
     };
   } else if (page.id === 'keyword') {
@@ -104,7 +118,7 @@ function clickMakeHistory() {
   modal.show();
 
   var uid = localStorage.getItem('uid');
-  $.getJSON("https://www.livlog.xyz/webapi/getHistory", {
+  $.getJSON(urls.getHistory, {
     "uid" : uid,
   }, function(data, status) {
 
@@ -162,7 +176,7 @@ function clickReMakeSiori(planId, period, keyword) {
   var uid = localStorage.getItem('uid');
   var vLat = startLat;
   var vLng = startLng;
-  $.getJSON("https://www.livlog.xyz/webapi/getPlan", {
+  $.getJSON(urls.getPlan, {
     "planId" : planId,
     "uid" : uid,
   }, function(data, status) {
@@ -262,7 +276,7 @@ function clickMakeSiori() {
   var uid = localStorage.getItem('uid');
   var vLat = startLat;
   var vLng = startLng;
-  $.getJSON("https://www.livlog.xyz/webapi/getTourspot", {
+  $.getJSON(urls.getTourspot, {
     "lat" : vLat,
     "lng" : vLng,
     "nights" : param.period,
@@ -295,6 +309,11 @@ function startMapAnimation(data) {
 // 地図アニメーション次のポイント
 function nextMapAnimation(count, data) {
   console.log("count:" + count);
+  if (data == null) {
+    alert('もう一度、プランを選択してください。');
+    return;
+  }
+
   setTimeout(function() {
     var p = latlngStart;
     var name = "GOAL"
@@ -431,7 +450,11 @@ function makeSioriAll(data) {
     } else {
       html += '<div class="timeline-content right">';
     }
-    html += '<span class="date">' + day + '日目 ' + half + ' </span>';
+    if (param.period == 9) {
+      html += '<span class="date">' + day + 'ヶ所目 </span>';
+    } else {
+      html += '<span class="date">' + day + '日目 ' + half + ' </span>';
+    }
     html += '<h4 class="title">' + data[i].name1 + '</h4>';
     html += '<p class="description">';
     if (data[i].descs.length > 0) {
@@ -439,13 +462,13 @@ function makeSioriAll(data) {
     }
     html += '</p>';
     html += '<a onclick="clickMakeEkispertUrl(' + lat1 + ',' + lng1 + ',' + lat2 + ',' + lng2 + ',this)" '
-    html += 'class="fab eki-button" target="_blank"><img src="img/ekispert-logo.png" width="30" style="margin: 12px;"></a>';
+    html += 'class="fab eki-button" target="_blank"><img src="images/ekispert-logo.png" width="30" style="margin: 12px;"></a>';
     html += '&nbsp;&nbsp;';
     html += '<a href="' + searchUrl + '" '
-    html += 'class="fab search-button" target="_blank"><img src="img/icons8-google-50.png" width="30" style="margin: 12px;"></a>';
+    html += 'class="fab search-button" target="_blank"><img src="images/icons8-google-50.png" width="30" style="margin: 12px;"></a>';
     html += '&nbsp;&nbsp;';
     html += '<a href="' + mapUrl + '" '
-    html += 'class="fab map-button" target="_blank"><img src="img/icons8-google-maps-50.png" width="30" style="margin: 12px;"></a>';
+    html += 'class="fab map-button" target="_blank"><img src="images/icons8-google-maps-50.png" width="30" style="margin: 12px;"></a>';
     html += '</div>';
     html += '</div>';
     timeline.append(html);
@@ -468,7 +491,7 @@ function makeSioriAll(data) {
       html += '<span class="date">ゴール</span>';
       html += '<h4 class="title"></h4>';
       html += '<a href="#" onclick="clickMakeEkispertUrl(' + lat1 + ',' + lng1 + ',' + lat2 + ',' + lng2 + ',this)" '
-      html += 'class="fab eki-button" target="_blank"><img src="img/ekispert-logo.png" width="30" style="margin: 12px;"></a>';
+      html += 'class="fab eki-button" target="_blank"><img src="images/ekispert-logo.png" width="30" style="margin: 12px;"></a>';
       html += '</div>';
       html += '</div>';
       timeline.append(html);
@@ -499,7 +522,7 @@ function clickMakeEkispertUrl(lat1, lng1, lat2, lng2, my) {
       'to' : lat2 + ',' + lng2,
   }
   var json = $.ajax({
-    url: 'https://www.livlog.xyz/webapi/getEkispertUrl',
+    url: urls.getEkispertUrl,
     type: 'GET',
     data: formdata,
     dataType: 'json',
@@ -531,6 +554,8 @@ function getPeriodName(period) {
     periodName = '3泊4日';
   } else if (period == 4) {
     periodName = '4泊5日';
+  } else if (period == 9) {
+    periodName = '散歩';
   }
 
   return periodName;
