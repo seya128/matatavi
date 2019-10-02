@@ -228,6 +228,27 @@ var rect = {
   }
 };
 
+if (navigator.geolocation) {
+  navigator.geolocation.getCurrentPosition(
+  // 取得成功した場合
+  function(position) {
+    startLat = position.coords.latitude;
+    startLng = position.coords.longitude;
+    latlngStart = null;
+    latlngStart = new Y.LatLng(startLat, startLng);
+    rect = {
+      "min" : {
+        "lat" : startLat,
+        "lng" : startLng
+      },
+      "max" : {
+        "lat" : startLat,
+        "lng" : startLng
+      }
+    };
+  });
+}
+
 // MAP初期化
 function initMap() {
   $('#canvas').html("");
@@ -250,49 +271,27 @@ function initMap() {
 
 // しおり作成クリック
 function clickMakeSiori() {
+  initMap();
 
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(
-    // 取得成功した場合
-    function(position) {
-      startLat = position.coords.latitude;
-      startLng = position.coords.longitude;
-      latlngStart = null;
-      latlngStart = new Y.LatLng(startLat, startLng);
-      rect = {
-        "min" : {
-          "lat" : startLat,
-          "lng" : startLng
-        },
-        "max" : {
-          "lat" : startLat,
-          "lng" : startLng
-        }
-      };
-
-      initMap();
-
-      var uid = localStorage.getItem('uid');
-      var vLat = startLat;
-      var vLng = startLng;
-      $.getJSON(urls.getTourspot, {
-        "lat" : vLat,
-        "lng" : vLng,
-        "nights" : param.period,
-        "keywords" : param.keyword,
-        "uid" : uid,
-      }, function(data, status) {
-        console.log(data);
-        var modal = document.querySelector('ons-modal');
-        modal.hide();
-        // ユーザーIDの保持
-        localStorage.setItem('uid', data.userId);
-        // 地図アニメーションスタート
-        $('#canvas').css('opacity', 1);
-        setTimeout(startMapAnimation(data.points), 1000);
-      });
-    });
-  }
+  var uid = localStorage.getItem('uid');
+  var vLat = startLat;
+  var vLng = startLng;
+  $.getJSON(urls.getTourspot, {
+    "lat" : vLat,
+    "lng" : vLng,
+    "nights" : param.period,
+    "keywords" : param.keyword,
+    "uid" : uid,
+  }, function(data, status) {
+    console.log(data);
+    var modal = document.querySelector('ons-modal');
+    modal.hide();
+    // ユーザーIDの保持
+    localStorage.setItem('uid', data.userId);
+    // 地図アニメーションスタート
+    $('#canvas').css('opacity', 1);
+    setTimeout(startMapAnimation(data.points), 1000);
+  });
 }
 
 // 地図アニメーション開始
