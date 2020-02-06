@@ -212,21 +212,9 @@ function clickReMakeSiori(planId, period, keyword) {
 //  }
 //});
 
-var ymap = null;
+var mymap = null;
 var startLat = 35.161089;
 var startLng = 136.882396;
-var latlngStart = new Y.LatLng(startLat, startLng);
-var oldLatLng = {};
-var rect = {
-  "min" : {
-    "lat" : startLat,
-    "lng" : startLng
-  },
-  "max" : {
-    "lat" : startLat,
-    "lng" : startLng
-  }
-};
 
 if (navigator.geolocation) {
   navigator.geolocation.getCurrentPosition(
@@ -234,18 +222,6 @@ if (navigator.geolocation) {
   function(position) {
     startLat = position.coords.latitude;
     startLng = position.coords.longitude;
-    latlngStart = null;
-    latlngStart = new Y.LatLng(startLat, startLng);
-    rect = {
-      "min" : {
-        "lat" : startLat,
-        "lng" : startLng
-      },
-      "max" : {
-        "lat" : startLat,
-        "lng" : startLng
-      }
-    };
   });
 }
 
@@ -253,20 +229,9 @@ if (navigator.geolocation) {
 function initMap() {
   $('#canvas').html("");
   $('#canvas').css('opacity', 0);
-  ymap = null;
 
   $('#list').html("");
 
-  rect = {
-    "min" : {
-      "lat" : startLat,
-      "lng" : startLng
-    },
-    "max" : {
-      "lat" : startLat,
-      "lng" : startLng
-    }
-  };
 }
 
 // しおり作成クリック
@@ -296,14 +261,30 @@ function clickMakeSiori() {
 
 // 地図アニメーション開始
 function startMapAnimation(data) {
-  ymap = new Y.Map("canvas");
-  ymap.drawMap(latlngStart, 9, Y.LayerSetId.NORMAL);
-  ymap.addControl(new Y.LayerSetControl());
-  ymap.addControl(new Y.ScaleControl());
-  ymap.addControl(new Y.SliderZoomControlVertical());
-  ymap.addFeature(new Y.Marker(latlngStart));
-  oldLatLng = latlngStart;
+ 
+  // マップオブジェクト作成
+  mymap = L.map('canvas',{
+    center: [startLat,startLng],
+    zoom: 11
+  });
+  
+  // 地図タイルデータ指定
+  L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+    attribution: '<a href="http://osm.org/copyright">OpenStreetMap</a>'
+  }).addTo(mymap);
+  // スケール表示
+  L.control.scale({imperial:false}).addTo(mymap);
 
+  // スタート地点のマーカーセット
+  L.marker([startLat,startLng]).addTo(mymap);
+
+  // 全体の範囲初期化
+  rect = {
+    min: [startLat,startLng],
+    max: [startLat,startLng],
+  };
+
+  // 次のポイントのアニメーションセット
   setTimeout(nextMapAnimation(0, data), 1000);
 }
 // 地図アニメーション次のポイント
@@ -315,53 +296,60 @@ function nextMapAnimation(count, data) {
   }
 
   setTimeout(function() {
-    var p = latlngStart;
+    var p = [startLat,startLng];
     var name = "GOAL"
+    var oldLatLng = [startLat,startLng];
+
+    // まだゴールでなければポイントデータ取得
     if (count < data.length) {
-      p = new Y.LatLng(data[count].lat, data[count].lng);
+      p = [data[count].lat, data[count].lng];
       name = data[count].name1;
     }
+    // 前回のポイント取得
+    if (count > 0) {
+      oldLatLng = [data[count-1].lat, data[count-1].lng]
+    }
 
-    ymap.panTo(p, true);
-    ymap.addFeature(new Y.Label(p, name));
-    ymap.addFeature(new Y.Marker(p));
+    // 全体の範囲更新
+    if (p[0] < rect.min[0])
+      rect.min[0] = p[0];
+    else if (p[0] > rect.max[0])
+      rect.max[0] = p[0];
+    if (p[1] < rect.min[1])
+      rect.min[1] = p[1];
+    else if (p[1] > rect.max[1])
+      rect.max[1] = p[1];
 
-    var style = new Y.Style("ffa500", 8, 0.5);
-    var latlngs = [ oldLatLng, p ];
-    var polyline = new Y.Polyline(latlngs, {
-      strokeStyle : style
-    });
-    ymap.addFeature(polyline);
+    // 地図の位置更新（Zoom値は2点間が収まるズーム+1）
+    var zoom = mymap.getBoundsZoom([oldLatLng, p ]);
+    mymap.flyTo(p, zoom+1);
 
-    oldLatLng = p;
+    // マーカーセット
+    L.marker(p)
+      .bindTooltip(name,{permanent:true})
+      .addTo(mymap)
+    ;
 
-    if (p.lat() < rect.min.lat)
-      rect.min.lat = p.lat();
-    else if (p.lat() > rect.max.lat)
-      rect.max.lat = p.lat();
-    if (p.lng() < rect.min.lng)
-      rect.min.lng = p.lng();
-    else if (p.lng() > rect.max.lng)
-      rect.max.lng = p.lng();
+    // 2点間を結ぶ線を描画
+    L.polyline([oldLatLng, p ], {
+      color: "#ffa500",
+      weight: 8,
+      opacity: 0.5,
+    }).addTo(mymap);
 
+    // 次のアニメーションをセット
     if (count + 1 <= data.length) {
       nextMapAnimation(count + 1, data);
     } else {
       zoomMapRect(); // ズームを全体に設定
       makeSioriAll(data);
     }
-  }, 1000);
+  }, 2000);
 }
 
 // マップを全体表示できるズームに
 function zoomMapRect() {
-  var bnds = new Y.LatLngBounds(new Y.LatLng(rect.min.lat, rect.min.lng),
-      new Y.LatLng(rect.max.lat, rect.max.lng));
-
-  var zoom = ymap.getBoundsZoomLevel(bnds);
-
-  console.log("zoom = " + zoom);
-  ymap.setZoom(zoom, true, bnds.getCenter(), true);
+  mymap.flyToBounds([rect.min, rect.max]);
 }
 
 function makeSioriAll(data) {
