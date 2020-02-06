@@ -1,5 +1,5 @@
 var domain = 'https://www.livlog.xyz/webapi/';
-//var domain = 'http://localhost:8080/livlog-api/';
+//var domain = 'http://localhost:8080/';
 var urls = {
   getHistory: domain + 'getHistory',
   getPlan: domain + 'getPlan',
@@ -269,8 +269,8 @@ function startMapAnimation(data) {
   });
   
   // 地図タイルデータ指定
-  L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-    attribution: '<a href="http://osm.org/copyright">OpenStreetMap</a>'
+  L.tileLayer('https://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+    attribution: '<a href="https://osm.org/copyright">OpenStreetMap</a>'
   }).addTo(mymap);
   // スケール表示
   L.control.scale({imperial:false}).addTo(mymap);
