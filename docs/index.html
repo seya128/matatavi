@@ -31,8 +31,13 @@
   <script type="text/javascript" src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
   <script type="text/javascript" src="js/index.js?20200206"></script>
 </head>
-<body>
-  <ons-splitter>
+<body class="main-background">
+  <div class="wire-frame">
+    <!-- スマホのフレーム画像 -->
+    <img alt="" src="./images/phone_frame.png" class="wire-frame-img">
+    <iframe src="index.html" class="wire-frame-iframe"></iframe>
+  </div>
+  <ons-splitter class="wire-frame-main">
     <ons-splitter-side id="menu" side="left" width="220px" collapse swipeable>
       <ons-page>
         <ons-list>

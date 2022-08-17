@@ -172,3 +172,64 @@ body {
     transition: none;
     opacity: 0.2;
 }
+
+.main-background {
+    background-image: url('../images/main_bg.jpg');
+    background-size: cover;
+}
+
+@media screen and (max-width: 760px) {
+
+    /* 760pxの幅まで適用される(モバイルの時のレイアウト) */
+    .wire-frame {
+        /* モバイルの時は、スマートフォンのフレーム画像を表示しない */
+        display: none;
+    }
+
+    /* コンテンツをスマホのフレーム内に収まるように上下中央に表示 */
+    .wire-frame-main {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+    }
+}
+
+@media screen and (min-width: 760px) {
+
+    /* 幅が760pxより大きい時に適用される(PC用のレイアウト) */
+    .wire-frame {
+        /* スマホのフレーム画像を上下中央に表示 */
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+        width: 400px;
+        height: 814px;
+    }
+
+    .wire-frame-img {
+        position: relative;
+        width: 400px;
+        height: 814px;
+    }
+
+    .wire-frame-iframe {
+        position: absolute;
+        top: 100px;
+        left: 29px;
+        width: 348px;
+        height: 610px;
+        border: 2px solid #fff;
+        border-radius: 2px;
+    }
+
+    /* コンテンツをスマホのフレーム内に収まるように上下中央に表示 */
+    .wire-frame-main {
+        display: none;
+    }
+}
